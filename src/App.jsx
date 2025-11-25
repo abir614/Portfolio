@@ -1,11 +1,13 @@
-import './App.css'
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Projects from "./components/Projects/Projects";
 
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
-      <h1 className="text-5xl font-bold text-primary animate-pulse">
-        Salman Toha Portfolio Coming Soon 🔥
-      </h1>
+    <div className="min-h-screen">
+      <Navbar />
+      <Hero />
+      <Projects />
     </div>
   );
 }
