@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@import "aos/dist/aos.css";
+
+body {
+  @apply bg-base-100 text-base-content transition-colors duration-300;
+}
