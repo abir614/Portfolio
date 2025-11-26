@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@import "aos/dist/aos.css";
+
+html {
+  scroll-behavior: smooth !important;
+  transition: all .7s ease;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}

@@ -1,3 +1,4 @@
+// src/lib/github.js
 export const fetchRepos = async () => {
   try {
     const response = await fetch(
@@ -6,10 +7,20 @@ export const fetchRepos = async () => {
     if (!response.ok) throw new Error("Failed to fetch repos");
     const data = await response.json();
 
-    // Filter out forks & your portfolio repo
-    return data
+    const filtered = data
       .filter(repo => !repo.fork && repo.name !== "Portfolio-Salman-Toha")
-      .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+      .map(repo => ({
+        ...repo,
+        stars: repo.stargazers_count,
+      }));
+
+    // STARRED FIRST → then by last updated
+    return filtered.sort((a, b) => {
+      if (a.stars !== b.stars) {
+        return b.stars - a.stars; // Highest stars first
+      }
+      return new Date(b.updated_at) - new Date(a.updated_at);
+    });
   } catch (err) {
     console.error("GitHub API error:", err);
     return [];

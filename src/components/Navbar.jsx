@@ -1,10 +1,27 @@
 import { useState } from "react";
-import { MotionDiv, MotionNav, MotionA } from "./MotionDiv";
+import { MotionDiv, MotionNav } from "./MotionDiv";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const links = ["About", "Projects", "Skills", "Contact"];
+
+  const smoothScroll = (e, id) => {
+    e.preventDefault();
+    
+    const element = id === "root" 
+      ? document.documentElement 
+      : document.getElementById(id);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+    
+    setIsOpen(false);
+  };
 
   return (
     <MotionNav
@@ -14,24 +31,25 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          <MotionDiv whileHover={{ scale: 1.1 }}>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          {/* HOME BUTTON */}
+          <MotionDiv whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+            <button
+              onClick={(e) => smoothScroll(e, "root")}
+              className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent cursor-pointer"
+            >
               Salman Toha
-            </h1>
+            </button>
           </MotionDiv>
 
           <div className="hidden md:flex items-center gap-8">
-            {links.map((link, i) => (
-              <MotionA
+            {links.map((link) => (
+              <button
                 key={link}
-                href={`#${link.toLowerCase()}`}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                onClick={(e) => smoothScroll(e, link.toLowerCase())}
                 className="hover:text-primary transition-colors font-medium"
               >
                 {link}
-              </MotionA>
+              </button>
             ))}
           </div>
 
@@ -50,14 +68,13 @@ export default function Navbar() {
             className="md:hidden mt-4 pb-4"
           >
             {links.map((link) => (
-              <a
+              <button
                 key={link}
-                href={`#${link.toLowerCase()}`}
-                className="block py-3 hover:text-primary font-medium"
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => smoothScroll(e, link.toLowerCase())}
+                className="block w-full text-left py-3 hover:text-primary font-medium"
               >
                 {link}
-              </a>
+              </button>
             ))}
           </MotionDiv>
         )}
