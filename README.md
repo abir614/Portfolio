@@ -4,7 +4,7 @@ A modern, fully responsive personal portfolio built with **Vite + React**, style
 
 Live Demo → https://portfolio-salman-toha.vercel.app
 
-![preview](https://github.com/TheLunatic1/Portfolio-Salman-Toha/assets/74038190/1e8c8d3f-5a0f-4d0e-9c8f-2b8e8f8e8f8e)
+![preview](https://github.com/TheLunatic1/Portfolio-Salman-Toha/preview.png)
 
 > Smooth animations • Dark/Light mode • Mobile-first
 
