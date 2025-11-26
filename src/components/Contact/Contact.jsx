@@ -1,3 +1,4 @@
+import { FaL, FaLinkedin, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { MotionDiv } from "../MotionDiv";
 import { FaFacebook, FaTwitter, FaYoutube, FaGithub, FaWhatsapp, FaEnvelope, FaPhone } from "react-icons/fa";
 
@@ -23,8 +24,8 @@ export default function Contact() {
             <a href="https://facebook.com/mac.ishrak.1846" target="_blank" className="btn btn-circle btn-ghost text-3xl hover:scale-110 transition">
               <FaFacebook className="text-blue-600" />
             </a>
-            <a href="https://twitter.com" target="_blank" className="btn btn-circle btn-ghost text-3xl hover:scale-110 transition">
-              <FaTwitter className="text-sky-500" />
+            <a href="https://x.com/SalmanToha_" target="_blank" className="btn btn-circle btn-ghost text-3xl hover:scale-110 transition">
+              <FaXTwitter />
             </a>
             <a href="https://youtube.com" target="_blank" className="btn btn-circle btn-ghost text-3xl hover:scale-110 transition">
               <FaYoutube className="text-red-600" />
@@ -34,6 +35,9 @@ export default function Contact() {
             </a>
             <a href="https://wa.me/8801780106916" target="_blank" className="btn btn-circle btn-success text-3xl hover:scale-110 transition">
               <FaWhatsapp />
+            </a>
+            <a href="https://www.linkedin.com/in/salman-toha/" target="_blank" className="btn btn-circle btn-success text-3xl hover:scale-110 transition">
+              <FaLinkedinIn />
             </a>
           </div>
 

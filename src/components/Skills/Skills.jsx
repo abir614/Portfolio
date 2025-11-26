@@ -4,12 +4,19 @@ import {
   SiReact, SiNextdotjs, SiJavascript, SiTailwindcss, SiDaisyui,
   SiFramer, SiFirebase, SiMongodb, SiNodedotjs, SiExpress,
   SiReactrouter, SiReacthookform, SiSwiper, SiVercel, SiNetlify,
-  SiJsonwebtokens, SiChartdotjs, SiGithub, SiGit
+  SiJsonwebtokens, SiChartdotjs, SiGithub, SiGit,
+  SiCss3,
+  SiArduino,
+  SiPython
 } from "react-icons/si";
-import { GiToaster } from "react-icons/gi";
+import { GiArtificialIntelligence, GiToaster } from "react-icons/gi";
 import { DiResponsive } from "react-icons/di";
 import { PiMathOperations } from "react-icons/pi";
 import { TbRouteSquare } from "react-icons/tb";
+import { FaCopyright, FaCuttlefish, FaHtml5, FaJava } from "react-icons/fa";
+import { MdOutlineSyncProblem } from "react-icons/md";
+import { FcCollaboration } from "react-icons/fc";
+import { CiTimer } from "react-icons/ci";
 
 const skills = [
   { name: "React.js", icon: SiReact, color: "text-cyan-400" },
@@ -36,6 +43,17 @@ const skills = [
   { name: "Responsive Design", icon: DiResponsive, color: "text-green-500" },
   { name: "CRUD Operations", icon: PiMathOperations, color: "text-indigo-500" },
   { name: "Protected Routes", icon: TbRouteSquare, color: "text-red-600" },
+  { name: "HTML5", icon: FaHtml5, color: "text-orange-600" },
+  { name: "CSS3", icon: SiCss3, color: "text-blue-600" },
+  { name: "C", icon: FaCopyright, color: "text-blue-700" },
+  { name: "C++", icon: FaCuttlefish, color: "text-blue-700" },
+  { name: "Python", icon: SiPython, color: "text-yellow-600" },
+  { name: "Java", icon: FaJava, color: "text-red-600" },
+  { name: "Problem Solving", icon: MdOutlineSyncProblem, color: "text-purple-500" },
+  { name: "Team Collaboration", icon: FcCollaboration, color: "text-teal-500" },
+  { name: "Time Management", icon: CiTimer, color: "text-pink-500" },
+  { name: "IoT Basics", icon: SiArduino, color: "text-cyan-500" },
+  { name: "AI-Driven Solutions", icon: GiArtificialIntelligence, color: "text-purple-600" }
 ];
 
 export default function Skills() {
@@ -52,7 +70,7 @@ export default function Skills() {
             My Skills
           </h2>
           <p className="text-xl text-base-content/70 mb-16">
-            Real tools from Game Vault, Book Haven & Programming Hero projects
+            Real tools I Use - From GitHub projects
           </p>
         </MotionDiv>
 
