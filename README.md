@@ -2,7 +2,7 @@
 
 A modern, fully responsive personal portfolio built with **Vite + React**, styled with **Tailwind CSS** and **DaisyUI**, animated using **Framer Motion**.
 
-Live Demo → https://portfolio-salman-toha.vercel.app
+Live Demo → https://salmantoha.vercel.app/
 
 ![preview](preview.png)
 
