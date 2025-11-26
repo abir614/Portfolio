@@ -70,4 +70,4 @@ vercel --prod
 - Add/remove skills in Skills.jsx
 
 
-####Made with React, Tailwind, and a lot of passion
+#### Made with React, Tailwind, and a lot of passion
