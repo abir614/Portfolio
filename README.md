@@ -1,16 +1,75 @@
-# React + Vite
+# Portfolio – Salman Toha
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, fully responsive personal portfolio built with **Vite + React**, styled with **Tailwind CSS** and **DaisyUI**, animated using **Framer Motion**.
 
-Currently, two official plugins are available:
+Live Demo → https://portfolio-salman-toha.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![preview](https://github.com/TheLunatic1/Portfolio-Salman-Toha/assets/74038190/1e8c8d3f-5a0f-4d0e-9c8f-2b8e8f8e8f8e)
 
-## React Compiler
+> Smooth animations • Dark/Light mode • Mobile-first • 90+ meaningful commits
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Tech Stack
 
-## Expanding the ESLint configuration
+- **Vite** – Ultra-fast build tool
+- **React 18** + Hooks
+- **TypeScript** (optional – can be removed)
+- **Tailwind CSS** + **DaisyUI** (components & themes)
+- **Framer Motion** – Beautiful animations & scroll effects
+- **React Icons** – Icon library
+- **Vercel** – One-click deployment
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Features
+
+- Hero section with typing animation
+- Animated About, Skills, Projects, and Contact sections
+- Square animated skills grid (hover effects)
+- Real GitHub projects showcase
+- Resume PDF download button
+- Fully responsive (mobile ↔ desktop)
+- Clean scroll indicator
+- Dark/Light mode ready
+
+### Project Structure
+```
+src/
+├── components/
+│   ├── Hero.jsx
+│   ├── About.jsx
+│   ├── Skills.jsx
+│   ├── Projects.jsx
+│   └── Contact.jsx
+├── MotionDiv.jsx        ← Framer Motion wrapper
+├── App.jsx
+└── main.jsx
+public/
+└── resume.pdf           ← Your resume (downloadable)
+```
+
+### How to Run Locally
+
+```bash
+# Clone the repo
+git clone https://github.com/TheLunatic1/Portfolio-Salman-Toha.git
+cd Portfolio-Salman-Toha
+
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+```
+Open → http://localhost:5173
+
+### Build for Production
+```
+vercel --prod
+```
+### Customization
+
+- Replace public/resume.pdf with your own
+- Update project links in Projects.jsx
+- Change colors in tailwind.config.js
+- Add/remove skills in Skills.jsx
+
+
+####Made with React, Tailwind, and a lot of passion
