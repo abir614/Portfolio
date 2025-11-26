@@ -17,7 +17,8 @@ export default function ProjectCard({ repo }) {
   const langColor = languageColors[repo.language] || "bg-gray-500";
 
   // Real GitHub OpenGraph preview (works 100%)
-  const previewImage = `https://opengraph.githubassets.com/1/TheLunatic1/${repo.name}`;
+  const previewImage = `https://raw.githubusercontent.com/TheLunatic1/${repo.name}/main/preview.png`;
+  const fallbackImage = "https://via.placeholder.com/600x400/1e293b/94a3b8?text=No+Preview";
 
   return (
     <MotionDiv
@@ -39,7 +40,7 @@ export default function ProjectCard({ repo }) {
           <figure className="relative h-56 bg-gray-900">
             <img
               src={previewImage}
-              alt={`${repo.name} preview`}
+              alt={fallbackImage}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               loading="lazy"
               onError={(e) => {
