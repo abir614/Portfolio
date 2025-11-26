@@ -6,13 +6,12 @@ Live Demo → https://portfolio-salman-toha.vercel.app
 
 ![preview](https://github.com/TheLunatic1/Portfolio-Salman-Toha/assets/74038190/1e8c8d3f-5a0f-4d0e-9c8f-2b8e8f8e8f8e)
 
-> Smooth animations • Dark/Light mode • Mobile-first • 90+ meaningful commits
+> Smooth animations • Dark/Light mode • Mobile-first
 
 ### Tech Stack
 
 - **Vite** – Ultra-fast build tool
 - **React 18** + Hooks
-- **TypeScript** (optional – can be removed)
 - **Tailwind CSS** + **DaisyUI** (components & themes)
 - **Framer Motion** – Beautiful animations & scroll effects
 - **React Icons** – Icon library
@@ -27,7 +26,6 @@ Live Demo → https://portfolio-salman-toha.vercel.app
 - Resume PDF download button
 - Fully responsive (mobile ↔ desktop)
 - Clean scroll indicator
-- Dark/Light mode ready
 
 ### Project Structure
 ```
