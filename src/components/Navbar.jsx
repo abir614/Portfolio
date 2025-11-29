@@ -1,25 +1,20 @@
 import { useState } from "react";
 import { MotionDiv, MotionNav } from "./MotionDiv";
+import FurryBall from "./FurryBall";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
   const links = ["About", "Projects", "Skills", "Contact"];
 
   const smoothScroll = (e, id) => {
     e.preventDefault();
-    
     const element = id === "root" 
       ? document.documentElement 
       : document.getElementById(id);
 
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    
     setIsOpen(false);
   };
 
@@ -31,16 +26,20 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          {/* HOME BUTTON */}
-          <MotionDiv whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+          {/* HOME + FURRY BALL */}
+          <MotionDiv whileHover={{ scale: 1.05 }} className="flex items-center gap-1">
             <button
               onClick={(e) => smoothScroll(e, "root")}
               className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent cursor-pointer"
             >
               Salman Toha
             </button>
+
+
+            {/* <FurryBall /> */}
           </MotionDiv>
 
+          {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
               <button
@@ -53,6 +52,7 @@ export default function Navbar() {
             ))}
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden btn btn-ghost text-xl"
@@ -61,6 +61,7 @@ export default function Navbar() {
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {isOpen && (
           <MotionDiv
             initial={{ opacity: 0, height: 0 }}
