@@ -40,7 +40,11 @@ export default function About() {
               <a href="https://github.com/TheLunatic1" target="_blank" className="btn btn-primary">
                 GitHub
               </a>
-              <a href="/resume.pdf" download className="btn btn-outline">
+              <a  
+              href="https://drive.google.com/file/d/1UIIg4Ku7gEiFIh7uSycBlVrCzGkYHIbW/view" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline">
                 Download Resume
               </a>
             </div>

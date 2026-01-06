@@ -70,7 +70,10 @@ export default function Contact() {
             <a href="mailto:ishrak1846@gmail.com" className="btn btn-primary btn-lg">
               Start a Project
             </a>
-            <a href="/resume.pdf" download className="btn btn-outline btn-lg">
+            <a href="https://drive.google.com/file/d/1UIIg4Ku7gEiFIh7uSycBlVrCzGkYHIbW/view" 
+              target="_blank"
+              rel="noopener noreferrer" 
+              className="btn btn-outline btn-lg">
               Download Resume (PDF)
             </a>
           </div>

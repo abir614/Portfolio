@@ -85,7 +85,10 @@ export default function Hero() {
           <a href="#projects" className="btn btn-primary btn-lg">
             View My Projects
           </a>
-          <a href="/resume.pdf" download className="btn btn-outline btn-lg">
+          <a  href="https://drive.google.com/file/d/1UIIg4Ku7gEiFIh7uSycBlVrCzGkYHIbW/view" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline btn-lg">
             Download Resume
           </a>
         </MotionDiv>
