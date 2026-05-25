@@ -72,13 +72,13 @@ export default function Hero() {
               <span className="text-primary">Currently: </span>
               <TypeAnimation
                 sequence={[
-                  "MERN Stack + Web, Mobile & DevOps 🚀",
+                  "MERN Stack + Web, Mobile & DevOps",
                   2000,
-                  "AI Enthusiast 🤖",
+                  "AI Enthusiast",
                   2000,
-                  "React & Next.js Specialist ⚛️",
+                  "React & Next.js Specialist",
                   2000,
-                  "Always Learning 📚",
+                  "Always Learning and Building",
                   2000,
                 ]}
                 wrapper="span"

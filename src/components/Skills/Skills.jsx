@@ -6,7 +6,7 @@ import {
   SiReactrouter, SiReacthookform, SiSwiper, SiVercel, SiNetlify,
   SiJsonwebtokens, SiChartdotjs, SiGithub, SiGit, SiCss3,
   SiArduino, SiPython, SiC, SiCplusplus, SiTypescript, SiLinux,
-  SiNginx, SiWix, SiPm2, SiThreedotjs
+  SiNginx, SiWix, SiPm2, SiThreedotjs, SiQemu
 } from "react-icons/si";
 import { GiArtificialIntelligence, GiToaster, GiDiamondRing } from "react-icons/gi";
 import { DiResponsive } from "react-icons/di";
@@ -68,12 +68,16 @@ const skillSections = [
       { name: "Git",               type: "local", model: "/models/git.glb",              glow: "#f05032", scale: 1.5 },
       { name: "GitHub",            icon: SiGithub,           color: "text-gray-800" },
       { name: "Vercel",            icon: SiVercel,           color: "text-black dark:text-white" },
-      { name: "Netlify",           icon: SiNetlify,          color: "text-cyan-500" },
-      { name: "Linux",             icon: SiLinux,            color: "text-orange-600" },
-      { name: "VPS",               icon: SiLinux,            color: "text-purple-600" },
       { name: "Nginx",             icon: SiNginx,            color: "text-green-600" },
       { name: "PM2",               icon: SiPm2,              color: "text-blue-600" },
+      { name: "Linux",             icon: SiLinux,            color: "text-orange-600" },
+      { name: "VPS",               icon: SiLinux,            color: "text-purple-600" },
+      { name: "Server Config & Setup", icon: SiLinux,        color: "text-red-600" },
+      { name: "KVM",               icon: SiQemu,             color: "text-blue-700" },
+      { name: "QEMU",              icon: SiQemu,             color: "text-blue-600" },
+      { name: "Libvirt",           icon: SiLinux,            color: "text-red-500" },
       { name: "Wix (CMS)",         icon: SiWix,              color: "text-gray-900" },
+      { name: "Netlify",           icon: SiNetlify,          color: "text-cyan-500" },
     ]
   },
   {
