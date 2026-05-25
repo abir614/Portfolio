@@ -77,7 +77,7 @@ const skillSections = [
       { name: "QEMU",              icon: SiQemu,             color: "text-blue-600" },
       { name: "Libvirt",           icon: SiLinux,            color: "text-red-500" },
       { name: "Netlify",           icon: SiNetlify,          color: "text-cyan-500" },
-      { name: "Wix (CMS)",         icon: SiWix,              color: "text-gray-900" },s
+      { name: "Wix (CMS)",         icon: SiWix,              color: "text-gray-900" },
     ]
   },
   {
