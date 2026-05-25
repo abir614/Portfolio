@@ -24,6 +24,7 @@ const skillSections = [
       { name: "React.js",          type: "local", model: "/models/react.glb",           glow: "#61dafb", scale: 0.5 },
       { name: "Next.js",           icon: SiNextdotjs,        color: "text-black dark:text-white" },
       { name: "JavaScript",        icon: SiJavascript,       color: "text-yellow-500" },
+      { name: "TypeScript",        icon: SiTypescript,       color: "text-blue-600" },
       { name: "HTML5",             icon: FaHtml5,            color: "text-orange-600" },
       { name: "CSS3",              icon: SiCss3,             color: "text-blue-600" },
       { name: "Tailwind CSS",      icon: SiTailwindcss,      color: "text-teal-500" },
@@ -53,7 +54,6 @@ const skillSections = [
       { name: "Express.js",        icon: SiExpress,          color: "text-gray-700" },
       { name: "MongoDB",           icon: SiMongodb,          color: "text-green-600" },
       { name: "Firebase",          icon: SiFirebase,         color: "text-yellow-500" },
-      { name: "TypeScript",        icon: SiTypescript,       color: "text-blue-600" },
       { name: "JWT",               icon: SiJsonwebtokens,    color: "text-purple-600" },
       { name: "CRUD Operations",   icon: PiMathOperations,   color: "text-indigo-500" },
       { name: "Protected Routes",  icon: TbRouteSquare,      color: "text-red-600" },
@@ -76,8 +76,8 @@ const skillSections = [
       { name: "KVM",               icon: SiQemu,             color: "text-blue-700" },
       { name: "QEMU",              icon: SiQemu,             color: "text-blue-600" },
       { name: "Libvirt",           icon: SiLinux,            color: "text-red-500" },
-      { name: "Wix (CMS)",         icon: SiWix,              color: "text-gray-900" },
       { name: "Netlify",           icon: SiNetlify,          color: "text-cyan-500" },
+      { name: "Wix (CMS)",         icon: SiWix,              color: "text-gray-900" },s
     ]
   },
   {
