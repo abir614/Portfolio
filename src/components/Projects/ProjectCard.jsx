@@ -18,7 +18,16 @@ export default function ProjectCard({ repo }) {
 
   // Real GitHub OpenGraph preview (works 100%)
   const previewImage = `https://raw.githubusercontent.com/TheLunatic1/${repo.name}/main/preview.png`;
-  const fallbackImage = "https://via.placeholder.com/600x400/1e293b/94a3b8?text=No+Preview";
+  
+
+  const handleCardClick = (e) => {
+    // Don't navigate if clicking on action buttons
+    if (e.target.closest('.action-button')) {
+      e.stopPropagation();
+      return;
+    }
+    window.open(repo.html_url, '_blank');
+  };
 
   return (
     <MotionDiv
@@ -29,99 +38,104 @@ export default function ProjectCard({ repo }) {
       transition={{ duration: 0.6 }}
       className="group h-full"
     >
-      <a
-        href={repo.html_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block h-full"
+      <div
+        onClick={handleCardClick}
+        className="relative h-full flex flex-col rounded-2xl border-2 border-primary/10 hover:border-primary/30 bg-linear-to-br from-base-100 to-base-200/50 backdrop-blur shadow-lg hover:shadow-2xl transition-all duration-400 overflow-hidden group cursor-pointer"
       >
-        <div className="card bg-base-200 shadow-xl hover:shadow-2xl transition-all duration-300 h-full flex flex-col cursor-pointer border border-base-300 relative overflow-hidden">
-          {/* Preview Image */}
-          <figure className="relative h-56 bg-gray-900">
-            <img
-              src={previewImage}
-              alt={fallbackImage}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-              onError={(e) => {
-                e.target.style.display = "none";
-                e.target.nextElementSibling.style.display = "block";
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-secondary/30 to-transparent hidden" />
-          </figure>
+        {/* Gradient Overlay Effect */}
+        <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
 
-          {/* Action Buttons (Round & Beautiful) */}
-          <div className="absolute top-4 right-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+        {/* Preview Image */}
+        <figure className="relative h-56 bg-linear-to-br from-gray-900 to-gray-800 overflow-hidden">
+          <img
+            src={previewImage}
+            alt={repo.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+            onError={(e) => {
+              e.target.style.display = "none";
+              if (e.target.nextElementSibling) {
+                e.target.nextElementSibling.style.display = "block";
+              }
+            }}
+          />
+          <div className="absolute inset-0 bg-linear-to-br from-primary/40 via-secondary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+        </figure>
+
+        {/* Action Buttons */}
+        <div className="absolute top-4 right-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 transform translate-y-4 group-hover:translate-y-0 action-button">
+          <a
+            href={repo.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-circle btn-sm bg-linear-to-r from-primary to-accent border-0 text-white shadow-xl hover:shadow-2xl hover:scale-110 transition-all"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <FiGithub className="text-lg" />
+          </a>
+          {repo.homepage && (
             <a
-              href={repo.html_url}
+              href={repo.homepage}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-circle btn-primary btn-sm shadow-lg"
+              className="btn btn-circle btn-sm bg-linear-to-r from-accent to-secondary border-0 text-white shadow-xl hover:shadow-2xl hover:scale-110 transition-all"
               onClick={(e) => e.stopPropagation()}
             >
-              <FiGithub className="text-lg" />
+              <FiExternalLink className="text-lg" />
             </a>
-            {repo.homepage && (
-              <a
-                href={repo.homepage}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-circle btn-secondary btn-sm shadow-lg"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <FiExternalLink className="text-lg" />
-              </a>
-            )}
+          )}
+        </div>
+
+        {/* Featured Badge */}
+        {repo.stargazers_count > 5 && (
+          <div className="absolute top-4 left-4 z-10">
+            <div className="badge badge-lg bg-linear-to-r from-primary to-accent text-white border-0 font-semibold shadow-lg animate-pulse">
+              <FiStar className="w-4 h-4 mr-1" /> Featured
+            </div>
+          </div>
+        )}
+
+        {/* Card Content */}
+        <div className="relative z-5 flex-1 flex flex-col p-6 space-y-4">
+          <div className="flex-1">
+            <h2 className="text-2xl font-bold text-transparent bg-linear-to-r from-primary to-accent bg-clip-text group-hover:from-accent group-hover:to-secondary transition-all capitalize mb-2">
+              {repo.name.replace(/-/g, " ")}
+            </h2>
+            <p className="text-base-content/70 line-clamp-3 leading-relaxed text-sm md:text-base">
+              {repo.description || "No description available"}
+            </p>
           </div>
 
-          {/* Featured Badge */}
-          {repo.stargazers_count > 5 && (
-            <div className="absolute top-4 left-4 z-10">
-              <div className="badge badge-primary badge-lg animate-pulse">
-                <FiStar className="w-4 h-4 mr-1" /> Featured
-              </div>
+          {/* Tech Stack from Topics */}
+          {repo.topics && repo.topics.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {repo.topics.map((topic) => (
+                <div key={topic} className="badge badge-outline badge-sm bg-primary/5 border-primary/20 text-primary/80 text-xs font-medium">
+                  {topic}
+                </div>
+              ))}
             </div>
           )}
 
-          <div className="card-body flex-1 flex flex-col p-6">
-            <h2 className="card-title text-2xl font-bold text-primary group-hover:text-primary-focus transition-colors capitalize">
-              {repo.name.replace(/-/g, " ")}
-            </h2>
-            <p className="text-base-content/70 line-clamp-3 flex-1">
-              {repo.description || "No description available"}
-            </p>
-
-            {/* Tech Stack from Topics */}
-            {repo.topics && repo.topics.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-4">
-                {repo.topics.map((topic) => (
-                  <div key={topic} className="badge badge-outline badge-sm">
-                    {topic}
-                  </div>
-                ))}
+          {/* Meta Info */}
+          <div className="flex flex-wrap gap-4 text-xs md:text-sm pt-2 border-t border-base-300/50">
+            {repo.language && (
+              <div className="flex items-center gap-2">
+                <div className={`w-3 h-3 rounded-full ${langColor}`} />
+                <span className="font-medium">{repo.language}</span>
               </div>
             )}
-
-            <div className="flex flex-wrap gap-4 underline-offset-4 mt-4 text-sm">
-              {repo.language && (
-                <div className="flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-full ${langColor}`} />
-                  <span>{repo.language}</span>
-                </div>
-              )}
-              <div className="flex items-center gap-1">
-                <FiStar className="text-yellow-500" />
-                <span>{repo.stargazers_count}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <FiGitBranch />
-                <span>{repo.forks_count}</span>
-              </div>
+            <div className="flex items-center gap-1 text-yellow-500 font-semibold">
+              <FiStar className="w-4 h-4" />
+              <span>{repo.stargazers_count}</span>
+            </div>
+            <div className="flex items-center gap-1 text-blue-500 font-semibold">
+              <FiGitBranch className="w-4 h-4" />
+              <span>{repo.forks_count}</span>
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </MotionDiv>
   );
 }

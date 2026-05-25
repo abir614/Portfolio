@@ -16,7 +16,7 @@ export default function About() {
             className="flex justify-center"
           >
             <div className="relative group">
-              <div className="absolute -inset-2 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-50 group-hover:opacity-100 transition-all" />
+              <div className="absolute -inset-2 bg-linear-to-r from-primary to-secondary rounded-full blur opacity-50 group-hover:opacity-100 transition-all" />
               <img
                 src="https://github.com/TheLunatic1.png"
                 alt="Salman Toha"
@@ -27,7 +27,7 @@ export default function About() {
 
           {/* ABOUT TEXT — FROM RESUME */}
           <div className="space-y-6">
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h2 className="text-5xl font-bold bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
               About Salman
             </h2>
             <p className="text-xl text-base-content/80 leading-relaxed">
