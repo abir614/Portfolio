@@ -1,6 +1,6 @@
-import { FaL, FaLinkedin, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { MotionDiv } from "../MotionDiv";
-import { FaFacebook, FaTwitter, FaYoutube, FaGithub, FaWhatsapp, FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaFacebook, FaYoutube, FaGithub, FaWhatsapp, FaEnvelope, FaPhone } from "react-icons/fa";
 
 export default function Contact() {
   return (

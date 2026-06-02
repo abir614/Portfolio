@@ -3,7 +3,7 @@ import { TypeAnimation } from "react-type-animation";
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative overflow-hidden bg-linear-to-br from-base-100 via-base-100 to-base-100 pt-32 pb-24">
+    <section id="hero" className="relative overflow-hidden pt-32 pb-24">
       {/* Modern Background Gradient */}
       <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
       
@@ -33,10 +33,9 @@ export default function Hero() {
       ))}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {/* Main Grid Layout - Mixed Hero + About */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
-          {/* Left Side - Main Greeting & Bio */}
+
+          {/* Left Side - Greeting, Bio, Education */}
           <div className="space-y-8">
             {/* Main Title */}
             <MotionDiv 

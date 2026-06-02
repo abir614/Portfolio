@@ -1,73 +1,116 @@
 # Portfolio – Salman Toha
 
-A modern, fully responsive personal portfolio built with **Vite + React**, styled with **Tailwind CSS** and **DaisyUI**, animated using **Framer Motion**.
+A modern, fully responsive personal portfolio built with **Vite 7 + React 19**, styled with **Tailwind CSS 4** and **DaisyUI 5**, animated with **Framer Motion**, and enhanced with 3D models via **Three.js / React Three Fiber**.
 
-Live Demo → https://salmantoha.vercel.app/
+**Live Demo** → [salmantoha.vercel.app](https://salmantoha.vercel.app/)
 
 ![preview](preview.png)
 
-> Smooth animations • Dark/Light mode • Mobile-first
+> Smooth animations • 3D skill models • Auto-updating GitHub projects • Mobile-first
+
+---
 
 ### Tech Stack
 
-- **Vite** – Ultra-fast build tool
-- **React 18** + Hooks
-- **Tailwind CSS** + **DaisyUI** (components & themes)
-- **Framer Motion** – Beautiful animations & scroll effects
-- **React Icons** – Icon library
-- **Vercel** – One-click deployment
+- **Vite 7** – Ultra-fast build tool with React + Tailwind plugins
+- **React 19** + Hooks (StrictMode)
+- **Tailwind CSS 4** + **DaisyUI 5** (utility-first + component library)
+- **Framer Motion** – Scroll-reveal animations and micro-interactions
+- **Three.js / @react-three/fiber / drei** – Interactive 3D skill cards
+- **react-icons** – Icon library (skill grid, socials, actions)
+- **react-type-animation** – Typed role rotator in Hero
+- **GitHub REST API** – Live project feed (auto-sorted by stars)
+- **Vercel** – Deployment
 
-### Features
+---
 
-- Hero section with typing animation
-- Animated About, Skills, Projects, and Contact sections
-- Square animated skills grid (hover effects)
-- Real GitHub projects showcase
-- Resume PDF download button
-- Fully responsive (mobile ↔ desktop)
-- Clean scroll indicator
+### Sections
+
+| Section | Details |
+|---|---|
+| **Hero** | Profile photo, typed role animation, bio, education, languages, dual CTAs (Resume / GitHub), floating particles, scroll indicator |
+| **Projects** | Auto-fetched from GitHub (non-forks, by stars), preview images, "Load More" pagination, skeleton loading |
+| **Skills** | 5 real-time 3D skill cards (`.glb` models) + icon grid across 6 categories (Frontend, Mobile, Backend, Tools, Other, Soft Skills) |
+| **Contact** | 6 social links + email/phone/location cards + Resume + "Start a Project" CTAs |
+
+---
 
 ### Project Structure
+
 ```
 src/
-├── components/
-│   ├── Hero.jsx
-│   ├── About.jsx
-│   ├── Skills.jsx
-│   ├── Projects.jsx
-│   └── Contact.jsx
-├── MotionDiv.jsx        ← Framer Motion wrapper
-├── App.jsx
-└── main.jsx
+├── main.jsx                    Entry point
+├── App.jsx                     Layout (Navbar → Hero → Projects → Skills → Contact)
+├── index.css                   Tailwind + DaisyUI base
+├── lib/github.js               GitHub API fetcher
+└── components/
+    ├── Navbar.jsx              Fixed glassy nav, smooth scroll, mobile menu
+    ├── Hero.jsx                Greeting, bio, typed roles, CTAs, particles
+    ├── MotionDiv.jsx           Framer Motion re-exports
+    ├── Local3D.jsx             Generic 3D model card (used in Skills)
+    ├── Projects/
+    │   ├── Projects.jsx        GitHub repo grid + load more logic
+    │   ├── ProjectCard.jsx     Repo card with preview, stars, topics
+    │   └── SkeletonCard.jsx    Loading placeholder
+    ├── Skills/
+    │   └── Skills.jsx          Skill grid with 3D models and icons
+    └── Contact/
+        └── Contact.jsx         Social links, contact info cards, CTAs
 public/
-└── resume.pdf           ← Your resume (downloadable)
+├── models/                     .glb 3D models (react, python, java, git, c, etc.)
+└── resume.pdf                  Downloadable resume
 ```
 
-### How to Run Locally
+---
+
+### Getting Started
 
 ```bash
-# Clone the repo
+# Clone
 git clone https://github.com/TheLunatic1/Portfolio-Salman-Toha.git
 cd Portfolio-Salman-Toha
 
-# Install dependencies
+# Install
 npm install
 
-# Start dev server
-npm run dev
-```
-Open → http://localhost:5173
+# Dev server
+npm run dev              # http://localhost:5173
 
-### Build for Production
+# Build
+npm run build
+
+# Preview build
+npm run preview
+
+# Lint
+npm run lint
 ```
-vercel --prod
-```
+
+---
+
 ### Customization
 
-- Replace public/resume.pdf with your own
-- Update project links in Projects.jsx
-- Change colors in tailwind.config.js
-- Add/remove skills in Skills.jsx
+- **Content** – Edit components under `src/components/` (Hero, Skills, Contact)
+- **Social links** – Update URLs in `Contact.jsx` and `Hero.jsx`
+- **Resume** – Replace `public/resume.pdf`
+- **GitHub user** – Change username in `src/lib/github.js` and `ProjectCard.jsx`
+- **Skills** – Add/remove items in `Skills.jsx`; add `.glb` models to `public/models/`
+- **SEO** – Edit `<meta>` tags in `index.html`
+- **Colors** – DaisyUI theme variables in `index.css`
+- **Deploy** – `vercel --prod` (or connect your own provider)
 
+---
 
-#### Made with React, Tailwind, and a lot of passion
+### Deployment
+
+This site is deployed via **Vercel**. Push to `main` triggers an automatic redeploy:
+
+```bash
+vercel --prod
+```
+
+Any static host (Netlify, Cloudflare Pages, GitHub Pages) also works — just point the publish directory to `dist/`.
+
+---
+
+Made with React, Tailwind, Three.js, and a lot of passion.

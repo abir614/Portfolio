@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-@import "aos/dist/aos.css";
-
 html {
   scroll-behavior: smooth !important;
   transition: all 0.7s ease;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MotionDiv, MotionNav } from "./MotionDiv";
-import FurryBall from "./FurryBall";
+import { SiReact } from "react-icons/si";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,8 +31,8 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
-          {/* HOME + LOGO */}
-          <MotionDiv whileHover={{ scale: 1.05 }} className="flex items-center gap-1">
+          <MotionDiv whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
+            <SiReact className="text-2xl text-cyan-400 animate-spin [animation-duration:8s]" />
             <button
               onClick={(e) => smoothScroll(e, "root")}
               className="text-2xl font-bold bg-linear-to-r from-primary via-accent to-secondary bg-clip-text text-transparent cursor-pointer hover:drop-shadow-lg transition-all"
