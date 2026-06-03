@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { MotionDiv } from "../MotionDiv";
-import { FiGithub, FiExternalLink, FiStar, FiGitBranch } from "react-icons/fi";
+import { FiGithub, FiExternalLink, FiStar, FiGitBranch, FiLock } from "react-icons/fi";
 
 const languageColors = {
   JavaScript: "bg-yellow-400",
@@ -14,11 +15,15 @@ const languageColors = {
 };
 
 export default function ProjectCard({ repo }) {
+  const [imgError, setImgError] = useState(false);
   const langColor = languageColors[repo.language] || "bg-gray-500";
 
-  // Real GitHub OpenGraph preview (works 100%)
+  // Real GitHub OpenGraph preview (works 100% for public repos)
   const previewImage = `https://raw.githubusercontent.com/TheLunatic1/${repo.name}/main/preview.png`;
   
+  const isPrivate = repo.private;
+  // Make private repos featured by default, or if it has > 5 stars
+  const isFeatured = repo.stargazers_count > 5 || isPrivate;
 
   const handleCardClick = (e) => {
     // Don't navigate if clicking on action buttons
@@ -45,33 +50,38 @@ export default function ProjectCard({ repo }) {
         {/* Gradient Overlay Effect */}
         <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
 
-        {/* Preview Image */}
-        <figure className="relative h-56 bg-linear-to-br from-gray-900 to-gray-800 overflow-hidden">
-          <img
-            src={previewImage}
-            alt={repo.name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
-            onError={(e) => {
-              e.target.style.display = "none";
-              if (e.target.nextElementSibling) {
-                e.target.nextElementSibling.style.display = "block";
-              }
-            }}
-          />
-          <div className="absolute inset-0 bg-linear-to-br from-primary/40 via-secondary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+        {/* Preview Image or Fallback */}
+        <figure className="relative h-56 bg-linear-to-br from-gray-900 to-gray-800 overflow-hidden flex items-center justify-center">
+          {!isPrivate && !imgError ? (
+            <img
+              src={previewImage}
+              alt={repo.name}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center opacity-50">
+              {isPrivate ? <FiLock className="w-12 h-12 mb-3 text-primary" /> : <FiGithub className="w-12 h-12 mb-3" />}
+              <span className="font-medium tracking-wide">
+                {isPrivate ? "Private Repository" : "No Preview Available"}
+              </span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-linear-to-br from-primary/40 via-secondary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
         </figure>
 
         {/* Action Buttons */}
-        <div className="absolute top-4 right-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 transform translate-y-4 group-hover:translate-y-0 action-button">
+        <div className="absolute top-4 right-4 flex flex-col gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10 transform translate-x-4 group-hover:translate-x-0 action-button">
           <a
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-circle btn-sm bg-linear-to-r from-primary to-accent border-0 text-white shadow-xl hover:shadow-2xl hover:scale-110 transition-all"
             onClick={(e) => e.stopPropagation()}
+            title="View Repository"
           >
-            <FiGithub className="text-lg" />
+            {isPrivate ? <FiLock className="text-lg" /> : <FiGithub className="text-lg" />}
           </a>
           {repo.homepage && (
             <a
@@ -80,20 +90,26 @@ export default function ProjectCard({ repo }) {
               rel="noopener noreferrer"
               className="btn btn-circle btn-sm bg-linear-to-r from-accent to-secondary border-0 text-white shadow-xl hover:shadow-2xl hover:scale-110 transition-all"
               onClick={(e) => e.stopPropagation()}
+              title="View Live Demo"
             >
               <FiExternalLink className="text-lg" />
             </a>
           )}
         </div>
 
-        {/* Featured Badge */}
-        {repo.stargazers_count > 5 && (
-          <div className="absolute top-4 left-4 z-10">
+        {/* Badges Container */}
+        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
+          {isFeatured && (
             <div className="badge badge-lg bg-linear-to-r from-primary to-accent text-white border-0 font-semibold shadow-lg animate-pulse">
               <FiStar className="w-4 h-4 mr-1" /> Featured
             </div>
-          </div>
-        )}
+          )}
+          {isPrivate && (
+            <div className="badge badge-lg bg-base-300/90 text-base-content backdrop-blur border border-base-content/10 font-semibold shadow-lg">
+              <FiLock className="w-4 h-4 mr-1" /> Private
+            </div>
+          )}
+        </div>
 
         {/* Card Content */}
         <div className="relative z-5 flex-1 flex flex-col p-6 space-y-4">
