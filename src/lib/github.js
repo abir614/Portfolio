@@ -20,7 +20,9 @@ export const fetchRepos = async () => {
 
     const data = await fallbackResponse.json();
 
-    const isFeatured = (repo) => repo.private || repo.stargazers_count > 5;
+    const isFeatured = (repo) => 
+      (repo.private && repo.stargazers_count > 0) || 
+      (!repo.private && repo.stargazers_count > 5);
 
     return data
       .filter(repo => !repo.fork)                          

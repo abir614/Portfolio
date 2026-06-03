@@ -22,8 +22,8 @@ export default function ProjectCard({ repo }) {
   const previewImage = `https://raw.githubusercontent.com/TheLunatic1/${repo.name}/main/preview.png`;
   
   const isPrivate = repo.private;
-  // Make private repos featured by default, or if it has > 5 stars
-  const isFeatured = repo.stargazers_count > 5 || isPrivate;
+  // Make private repos featured if they have at least 1 star. Public if > 5 stars.
+  const isFeatured = (isPrivate && repo.stargazers_count > 0) || (!isPrivate && repo.stargazers_count > 5);
 
   const handleCardClick = (e) => {
     // Don't navigate if clicking on action buttons

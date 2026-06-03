@@ -27,7 +27,9 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     // Do the filtering and sorting here on the server so the browser downloads less data
-    const isFeatured = (repo) => repo.private || repo.stargazers_count > 5;
+    const isFeatured = (repo) => 
+      (repo.private && repo.stargazers_count > 0) || 
+      (!repo.private && repo.stargazers_count > 5);
 
     const sortedRepos = data
       .filter(repo => !repo.fork) // Remove forks
