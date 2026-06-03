@@ -20,12 +20,24 @@ export const fetchRepos = async () => {
 
     const data = await fallbackResponse.json();
 
+    const isFeatured = (repo) => repo.private || repo.stargazers_count > 5;
+
     return data
       .filter(repo => !repo.fork)                          
       .sort((a, b) => {
+        const aFeatured = isFeatured(a);
+        const bFeatured = isFeatured(b);
+
+        // 1. Prioritize Featured Repositories
+        if (aFeatured && !bFeatured) return -1;
+        if (!aFeatured && bFeatured) return 1;
+
+        // 2. Secondary: Highest stars first
         if (b.stargazers_count !== a.stargazers_count) {
           return b.stargazers_count - a.stargazers_count;
         }
+        
+        // 3. Tertiary: Most recently updated
         return new Date(b.updated_at) - new Date(a.updated_at);
       })
       .slice(0, 100);

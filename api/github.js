@@ -27,14 +27,24 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     // Do the filtering and sorting here on the server so the browser downloads less data
+    const isFeatured = (repo) => repo.private || repo.stargazers_count > 5;
+
     const sortedRepos = data
       .filter(repo => !repo.fork) // Remove forks
       .sort((a, b) => {
-        // Primary: Highest stars first
+        const aFeatured = isFeatured(a);
+        const bFeatured = isFeatured(b);
+
+        // 1. Prioritize Featured Repositories
+        if (aFeatured && !bFeatured) return -1;
+        if (!aFeatured && bFeatured) return 1;
+
+        // 2. Secondary: Highest stars first
         if (b.stargazers_count !== a.stargazers_count) {
           return b.stargazers_count - a.stargazers_count;
         }
-        // Secondary: Most recently updated
+        
+        // 3. Tertiary: Most recently updated
         return new Date(b.updated_at) - new Date(a.updated_at);
       })
       .slice(0, 100);
