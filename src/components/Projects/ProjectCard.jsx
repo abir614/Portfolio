@@ -16,7 +16,7 @@ const languageColors = {
 
 export default function ProjectCard({ repo }) {
   const [imgError, setImgError] = useState(false);
-  const langColor = languageColors[repo.language] || "bg-gray-500";
+  const langColor = languageColors[repo.language] || "bg-base-content/50";
 
   // Real GitHub OpenGraph preview (works 100% for public repos)
   const previewImage = `https://raw.githubusercontent.com/TheLunatic1/${repo.name}/main/preview.png`;
@@ -51,7 +51,7 @@ export default function ProjectCard({ repo }) {
         <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
 
         {/* Preview Image or Fallback */}
-        <figure className="relative h-56 bg-linear-to-br from-gray-900 to-gray-800 overflow-hidden flex items-center justify-center">
+        <figure className="relative h-56 bg-linear-to-br from-base-300 to-base-200 overflow-hidden flex items-center justify-center">
           {!isPrivate && !imgError ? (
             <img
               src={previewImage}

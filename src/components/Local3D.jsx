@@ -23,7 +23,7 @@ export default function Local3D({ model, glow = "#bd8cd9", name, scale = 1 }) {
       </div>
 
       <div className="py-3 px-2 text-center bg-base-100 rounded-b-2xl">
-        <p className="text-xs font-bold text-gray-700 group-hover:text-purple-500 transition-colors duration-300 tracking-tight">
+        <p className="text-xs font-bold text-base-content group-hover:text-purple-500 transition-colors duration-300 tracking-tight">
           {name}
         </p>
       </div>

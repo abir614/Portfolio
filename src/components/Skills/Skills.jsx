@@ -22,7 +22,7 @@ const skillSections = [
     title: "Frontend",
     skills: [
       { name: "React.js",          type: "local", model: "/models/react.glb",           glow: "#61dafb", scale: 0.5 },
-      { name: "Next.js",           icon: SiNextdotjs,        color: "text-black dark:text-white" },
+      { name: "Next.js",           icon: SiNextdotjs,        color: "text-base-content" },
       { name: "JavaScript",        icon: SiJavascript,       color: "text-yellow-500" },
       { name: "TypeScript",        icon: SiTypescript,       color: "text-blue-600" },
       { name: "HTML5",             icon: FaHtml5,            color: "text-orange-600" },
@@ -36,7 +36,7 @@ const skillSections = [
       { name: "Responsive Design", icon: DiResponsive,       color: "text-green-500" },
       { name: "React Hot Toast",   icon: GiToaster,          color: "text-orange-500" },
       { name: "React Tooltip",     icon: GrTooltip,          color: "text-blue-500" },
-      { name: "Three.js",          icon: SiThreedotjs,       color: "text-black dark:text-white" },
+      { name: "Three.js",          icon: SiThreedotjs,       color: "text-base-content" },
     ]
   },
   {
@@ -51,7 +51,7 @@ const skillSections = [
     title: "Backend",
     skills: [
       { name: "Node.js",           icon: SiNodedotjs,        color: "text-green-600" },
-      { name: "Express.js",        icon: SiExpress,          color: "text-gray-700" },
+      { name: "Express.js",        icon: SiExpress,          color: "text-base-content" },
       { name: "MongoDB",           icon: SiMongodb,          color: "text-green-600" },
       { name: "Firebase",          icon: SiFirebase,         color: "text-yellow-500" },
       { name: "JWT",               icon: SiJsonwebtokens,    color: "text-purple-600" },
@@ -66,8 +66,8 @@ const skillSections = [
     title: "Tools & Platforms",
     skills: [
       { name: "Git",               type: "local", model: "/models/git.glb",              glow: "#f05032", scale: 1.5 },
-      { name: "GitHub",            icon: SiGithub,           color: "text-gray-800" },
-      { name: "Vercel",            icon: SiVercel,           color: "text-black dark:text-white" },
+      { name: "GitHub",            icon: SiGithub,           color: "text-base-content" },
+      { name: "Vercel",            icon: SiVercel,           color: "text-base-content" },
       { name: "Nginx",             icon: SiNginx,            color: "text-green-600" },
       { name: "PM2",               icon: SiPm2,              color: "text-blue-600" },
       { name: "Linux",             icon: SiLinux,            color: "text-orange-600" },
@@ -77,7 +77,7 @@ const skillSections = [
       { name: "QEMU",              icon: SiQemu,             color: "text-blue-600" },
       { name: "Libvirt",           icon: SiLinux,            color: "text-red-500" },
       { name: "Netlify",           icon: SiNetlify,          color: "text-cyan-500" },
-      { name: "Wix (CMS)",         icon: SiWix,              color: "text-gray-900" },
+      { name: "Wix (CMS)",         icon: SiWix,              color: "text-base-content" },
     ]
   },
   {
@@ -152,7 +152,7 @@ export default function Skills() {
                       <skill.icon
                         className={`text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 ${skill.color} group-hover:scale-125 group-hover:drop-shadow-lg transition-all duration-300`}
                       />
-                      <p className="text-xs font-bold text-gray-700 dark:text-gray-200 group-hover:text-primary transition-colors tracking-tight text-center line-clamp-2">
+                      <p className="text-xs font-bold text-base-content group-hover:text-primary transition-colors tracking-tight text-center line-clamp-2">
                         {skill.name}
                       </p>
                     </div>

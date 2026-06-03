@@ -37,13 +37,13 @@ export default function Contact() {
           <a href="https://facebook.com/mac.ishrak.1846" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-linear-to-br from-blue-600 to-blue-700 text-white flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all duration-300">
             <FaFacebook className="text-xl md:text-2xl" />
           </a>
-          <a href="https://x.com/SalmanToha_" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-base-content/30 text-base-content hover:bg-black hover:text-white hover:border-black hover:scale-110 transition-all duration-300 flex items-center justify-center">
+          <a href="https://x.com/SalmanToha_" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-base-content/30 text-base-content hover:bg-base-content hover:text-base-100 hover:border-base-content hover:scale-110 transition-all duration-300 flex items-center justify-center">
             <FaXTwitter className="text-xl md:text-2xl" />
           </a>
           <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-linear-to-br from-red-600 to-red-700 text-white flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all duration-300">
             <FaYoutube className="text-xl md:text-2xl" />
           </a>
-          <a href="https://github.com/TheLunatic1" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-base-content/30 text-base-content hover:bg-gray-800 hover:text-white hover:border-gray-800 hover:scale-110 transition-all duration-300 flex items-center justify-center">
+          <a href="https://github.com/TheLunatic1" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-base-content/30 text-base-content hover:bg-base-content hover:text-base-100 hover:border-base-content hover:scale-110 transition-all duration-300 flex items-center justify-center">
             <FaGithub className="text-xl md:text-2xl" />
           </a>
           <a href="https://wa.me/8801780106916" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-linear-to-br from-green-500 to-green-600 text-white flex items-center justify-center hover:scale-110 hover:shadow-xl transition-all duration-300">

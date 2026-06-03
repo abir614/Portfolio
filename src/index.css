@@ -1,9 +1,15 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: light --default, dracula --prefersdark;
+}
 
 html {
   scroll-behavior: smooth !important;
   transition: all 0.7s ease;
+}
+
+body {
+  font-family: 'Hack', monospace;
 }
 
 @keyframes spin-slow {
