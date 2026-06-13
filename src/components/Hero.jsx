@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative overflow-hidden pt-32 pb-24">
       {/* Modern Background Gradient */}
-      <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-base-200 pointer-events-none" />
       
       {/* Animated Gradient Blobs */}
       <div className="absolute top-20 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-pulse" />
@@ -45,7 +45,7 @@ export default function Hero() {
             >
               <h1 className="text-6xl md:text-7xl font-bold leading-tight">
                 Hi, I'm{" "}
-                <span className="bg-linear-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                <span className="bg-base-200 text-white">
                   Salman Toha
                 </span>
               </h1>
@@ -56,7 +56,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-lg md:text-xl text-base-content/80 leading-relaxed max-w-xl"
+              className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-xl"
             >
               A <span className="font-bold text-primary">Full Stack Developer</span> from Dhaka, Bangladesh, skilled in <span className="font-semibold">MERN Stack</span>, <span className="font-semibold">Web & Mobile</span> development, and <span className="font-semibold">DevOps</span>. Passionate about building scalable, high-performance applications with cutting-edge technologies.
             </MotionDiv>
@@ -66,7 +66,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-2xl md:text-3xl font-semibold mb-8 text-base-content/90"
+              className="text-2xl md:text-3xl font-semibold mb-8 text-gray-200"
             >
               <span className="text-primary">Currently: </span>
               <TypeAnimation
@@ -91,7 +91,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.8 }}
-              className="text-base md:text-lg text-base-content/70 space-y-2"
+              className="text-base md:text-lg text-gray-400 space-y-2"
             >
               <p><span className="font-semibold text-primary">🎓</span> Daffodil International University (BSc CSE, 4th Year) - GPA: HSC 4.95/5.00</p>
               <p><span className="font-semibold text-primary">🌍</span> Languages: Bangla (Native) • English (IELTS 6.5) • Hindi (Conversational)</p>
@@ -108,7 +108,7 @@ export default function Hero() {
                 href="https://drive.google.com/file/d/1UIIg4Ku7gEiFIh7uSycBlVrCzGkYHIbW/view" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 text-lg font-semibold rounded-xl bg-linear-to-r from-primary to-accent text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95"
+                className="px-8 py-3 text-lg font-semibold rounded-xl bg-blue-600 text-white shadow-lg hover:bg-blue-500 hover:shadow-xl transition-all hover:scale-105 active:scale-95"
               >
                 See Resume
               </a>
@@ -132,8 +132,8 @@ export default function Hero() {
             className="flex justify-center order-first lg:order-last"
           >
             <div className="relative group">
-              <div className="absolute -inset-1 bg-linear-to-r from-primary via-accent to-secondary rounded-3xl blur-2xl opacity-40 group-hover:opacity-80 transition-all duration-500" />
-              <div className="absolute -inset-0.5 bg-linear-to-r from-primary via-accent to-secondary rounded-3xl blur opacity-30 group-hover:opacity-60 animate-pulse" />
+              <div className="absolute -inset-1 bg-base-200 rounded-3xl blur-2xl opacity-40 group-hover:opacity-80 transition-all duration-500" />
+              <div className="absolute -inset-0.5 bg-base-200 rounded-3xl blur opacity-30 group-hover:opacity-60 animate-pulse" />
               <img
                 src="https://github.com/TheLunatic1.png"
                 alt="Salman Toha"

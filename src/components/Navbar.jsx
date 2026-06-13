@@ -27,7 +27,7 @@ export default function Navbar() {
     <MotionNav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-linear-to-b from-base-100/95 to-base-100/80 border-b border-primary/10 shadow-lg"
+      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-base-200 border-b border-primary/10 shadow-lg"
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
@@ -35,7 +35,7 @@ export default function Navbar() {
             <SiReact className="text-2xl text-cyan-400 animate-spin [animation-duration:8s]" />
             <button
               onClick={(e) => smoothScroll(e, "root")}
-              className="text-2xl font-bold bg-linear-to-r from-primary via-accent to-secondary bg-clip-text text-transparent cursor-pointer hover:drop-shadow-lg transition-all"
+              className="text-2xl font-bold text-white cursor-pointer hover:drop-shadow-lg transition-all"
             >
               Salman Toha
             </button>
@@ -47,10 +47,10 @@ export default function Navbar() {
               <button
                 key={link.id}
                 onClick={(e) => smoothScroll(e, link.id)}
-                className="px-4 py-2 rounded-lg hover:bg-primary/10 text-base-content/80 hover:text-primary transition-all duration-300 font-medium group relative"
+                className="px-4 py-2 rounded-lg hover:bg-primary/10 text-gray-300 hover:text-primary transition-all duration-300 font-medium group relative"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-primary to-secondary group-hover:w-full transition-all duration-300 rounded-full" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-base-200 group-hover:w-full transition-all duration-300 rounded-full" />
               </button>
             ))}
           </div>
@@ -76,7 +76,7 @@ export default function Navbar() {
               <button
                 key={link.id}
                 onClick={(e) => smoothScroll(e, link.id)}
-                className="block w-full text-left py-3 px-4 rounded-lg hover:bg-primary/10 text-base-content/80 hover:text-primary font-medium transition-all duration-300"
+                className="block w-full text-left py-3 px-4 rounded-lg hover:bg-primary/10 text-gray-300 hover:text-primary font-medium transition-all duration-300"
               >
                 {link.label}
               </button>
