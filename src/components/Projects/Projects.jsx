@@ -25,7 +25,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="relative py-24 px-6 bg-linear-to-br from-base-100 via-base-200/30 to-base-100 overflow-hidden">
+    <section id="projects" className="relative py-24 px-6 bg-base-200 overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-20 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-20 -left-40 w-80 h-80 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
@@ -38,10 +38,10 @@ export default function Projects() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl pb-3 font-bold mb-6 bg-linear-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl pb-3 font-bold mb-6 text-white">
             My Projects
           </h2>
-          <p className="text-lg md:text-xl text-base-content/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Here are some of my latest works from GitHub — automatically updated!
           </p>
         </MotionDiv>
@@ -75,7 +75,7 @@ export default function Projects() {
           >
             <button
               onClick={handleLoadMore}
-              className="px-8 py-3 text-lg font-semibold rounded-xl bg-linear-to-r from-primary to-accent text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+              className="px-8 py-3 text-lg font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
             >
               Load More Projects
             </button>
@@ -85,7 +85,7 @@ export default function Projects() {
         {/* No Projects Message */}
         {!loading && repos.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-2xl text-base-content/50 font-semibold">No public repos found</p>
+            <p className="text-2xl text-gray-400 font-semibold">No public repos found</p>
           </div>
         )}
 
@@ -99,8 +99,8 @@ export default function Projects() {
               transition={{ duration: 0.6 }}
               className="space-y-3"
             >
-              <p className="text-lg text-base-content/60 font-medium">✨ You've reached the end!</p>
-              <p className="text-base-content/50">All {repos.length} projects are now visible</p>
+              <p className="text-lg text-gray-400 font-medium">✨ You've reached the end!</p>
+              <p className="text-gray-500">All {repos.length} projects are now visible</p>
             </MotionDiv>
           </div>
         )}

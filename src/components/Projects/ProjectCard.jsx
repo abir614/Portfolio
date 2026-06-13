@@ -3,15 +3,15 @@ import { MotionDiv } from "../MotionDiv";
 import { FiGithub, FiExternalLink, FiStar, FiGitBranch, FiLock } from "react-icons/fi";
 
 const languageColors = {
-  JavaScript: "bg-yellow-400",
-  TypeScript: "bg-blue-600",
-  HTML: "bg-orange-600",
-  CSS: "bg-purple-600",
-  Python: "bg-green-600",
-  Java: "bg-red-600",
-  React: "bg-cyan-500",
-  Node: "bg-green-600",
-  Tailwind: "bg-teal-500",
+  JavaScript: "bg-base-300",
+  TypeScript: "bg-base-300",
+  HTML: "bg-base-300",
+  CSS: "bg-base-300",
+  Python: "bg-base-300",
+  Java: "bg-base-300",
+  React: "bg-base-300",
+  Node: "bg-base-300",
+  Tailwind: "bg-base-300",
 };
 
 export default function ProjectCard({ repo }) {
@@ -45,13 +45,13 @@ export default function ProjectCard({ repo }) {
     >
       <div
         onClick={handleCardClick}
-        className="relative h-full flex flex-col rounded-2xl border-2 border-primary/10 hover:border-primary/30 bg-linear-to-br from-base-100 to-base-200/50 backdrop-blur shadow-lg hover:shadow-2xl transition-all duration-400 overflow-hidden group cursor-pointer"
+        className="relative h-full flex flex-col rounded-2xl border-2 border-primary/10 hover:border-primary/30 bg-base-200 backdrop-blur shadow-lg hover:shadow-2xl transition-all duration-400 overflow-hidden group cursor-pointer"
       >
         {/* Gradient Overlay Effect */}
-        <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
+        <div className="absolute inset-0 bg-base-200 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
 
         {/* Preview Image or Fallback */}
-        <figure className="relative h-56 bg-linear-to-br from-base-300 to-base-200 overflow-hidden flex items-center justify-center">
+        <figure className="relative h-56 bg-base-200 overflow-hidden flex items-center justify-center">
           {!isPrivate && !imgError ? (
             <img
               src={previewImage}
@@ -68,7 +68,7 @@ export default function ProjectCard({ repo }) {
               </span>
             </div>
           )}
-          <div className="absolute inset-0 bg-linear-to-br from-primary/40 via-secondary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
+          <div className="absolute inset-0 bg-base-200 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
         </figure>
 
         {/* Action Buttons */}
@@ -77,7 +77,7 @@ export default function ProjectCard({ repo }) {
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-circle btn-sm bg-linear-to-r from-primary to-accent border-0 text-white shadow-xl hover:shadow-2xl hover:scale-110 transition-all"
+            className="btn btn-circle btn-sm bg-blue-600 hover:bg-blue-500 border-0 text-white shadow-xl hover:shadow-2xl hover:scale-110 transition-all"
             onClick={(e) => e.stopPropagation()}
             title="View Repository"
           >
@@ -88,7 +88,7 @@ export default function ProjectCard({ repo }) {
               href={repo.homepage}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-circle btn-sm bg-linear-to-r from-accent to-secondary border-0 text-white shadow-xl hover:shadow-2xl hover:scale-110 transition-all"
+              className="btn btn-circle btn-sm bg-blue-600 hover:bg-blue-500 border-0 text-white shadow-xl hover:shadow-2xl hover:scale-110 transition-all"
               onClick={(e) => e.stopPropagation()}
               title="View Live Demo"
             >
@@ -100,7 +100,7 @@ export default function ProjectCard({ repo }) {
         {/* Badges Container */}
         <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
           {isFeatured && (
-            <div className="badge badge-lg bg-linear-to-r from-primary to-accent text-white border-0 font-semibold shadow-lg animate-pulse">
+            <div className="badge badge-lg bg-base-200 text-white border-0 font-semibold shadow-lg animate-pulse">
               <FiStar className="w-4 h-4 mr-1" /> Featured
             </div>
           )}
@@ -114,10 +114,10 @@ export default function ProjectCard({ repo }) {
         {/* Card Content */}
         <div className="relative z-5 flex-1 flex flex-col p-6 space-y-4">
           <div className="flex-1">
-            <h2 className="text-2xl font-bold text-transparent bg-linear-to-r from-primary to-accent bg-clip-text group-hover:from-accent group-hover:to-secondary transition-all capitalize mb-2">
+            <h2 className="text-2xl font-bold text-slate-100 group-hover:text-primary transition-colors capitalize mb-2">
               {repo.name.replace(/-/g, " ")}
             </h2>
-            <p className="text-base-content/70 line-clamp-3 leading-relaxed text-sm md:text-base">
+            <p className="text-slate-300 line-clamp-3 leading-relaxed text-sm md:text-base">
               {repo.description || "No description available"}
             </p>
           </div>
