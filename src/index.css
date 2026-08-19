@@ -1,21 +1,313 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: dim --default;
+
+@layer base {
+  :root {
+    --neo-bg: #f6f7f9;
+    --neo-bg-alt: #ffffff;
+    --neo-surface: #ffffff;
+    --neo-surface-subtle: #f1f3f5;
+    --neo-surface-muted: #e9ecef;
+    --neo-border: #121212;
+    --neo-border-subtle: #e2e8f0;
+    --neo-text: #121212;
+    --neo-text-muted: #555c68;
+    --neo-text-subtle: #798394;
+    --neo-shadow: #121212;
+    --neo-shadow-color: rgba(18, 18, 18, 1);
+    --neo-accent: #4f46e5;
+    --neo-accent-hover: #4338ca;
+    --neo-accent-light: #eef2ff;
+    --neo-amber: #f59e0b;
+    --neo-emerald: #10b981;
+    --neo-rose: #e11d48;
+    --neo-cyan: #0891b2;
+    --neo-grid-dot: #d1d5db;
+  }
+
+  .dark {
+    --neo-bg: #0b0f19;
+    --neo-bg-alt: #111827;
+    --neo-surface: #141d2e;
+    --neo-surface-subtle: #1e293f;
+    --neo-surface-muted: #283754;
+    --neo-border: rgba(255, 255, 255, 0.68);
+    --neo-border-subtle: rgba(255, 255, 255, 0.25);
+    --neo-text: #f8fafc;
+    --neo-text-muted: #94a3b8;
+    --neo-text-subtle: #64748b;
+    --neo-shadow: rgba(255, 255, 255, 0.45);
+    --neo-shadow-color: rgba(255, 255, 255, 0.45);
+    --neo-accent: #6366f1;
+    --neo-accent-hover: #818cf8;
+    --neo-accent-light: rgba(99, 102, 241, 0.2);
+    --neo-amber: #fbbf24;
+    --neo-emerald: #34d399;
+    --neo-rose: #fb7185;
+    --neo-cyan: #22d3ee;
+    --neo-grid-dot: #1e293b;
+  }
+
+
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  body {
+    background-color: var(--neo-bg);
+    color: var(--neo-text);
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  code, kbd, samp, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
 }
 
-html {
-  scroll-behavior: smooth !important;
-  transition: all 0.7s ease;
+/* Minimal Neo-Brutalist Utility Classes */
+.neo-box {
+  background-color: var(--neo-surface);
+  border: 2px solid var(--neo-border);
+  box-shadow: 4px 4px 0px var(--neo-shadow);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
 
-body {
-  font-family: 'Hack', monospace;
+.neo-box-sm {
+  background-color: var(--neo-surface);
+  border: 2px solid var(--neo-border);
+  box-shadow: 2px 2px 0px var(--neo-shadow);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.neo-box-lg {
+  background-color: var(--neo-surface);
+  border: 3px solid var(--neo-border);
+  box-shadow: 6px 6px 0px var(--neo-shadow);
 }
-.animate-spin-slow {
-  animation: spin-slow 3s linear infinite;
+
+.neo-hover-lift {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neo-hover-lift:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px var(--neo-shadow);
+}
+
+.neo-hover-lift:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--neo-shadow);
+}
+
+/* Neo-Brutalist Buttons */
+.neo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  border: 2px solid var(--neo-border);
+  box-shadow: 3px 3px 0px var(--neo-shadow);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease;
+}
+
+.neo-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px var(--neo-shadow);
+}
+
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--neo-shadow);
+}
+
+.neo-btn-primary {
+  background-color: var(--neo-accent);
+  color: #ffffff;
+}
+
+.neo-btn-primary:hover {
+  background-color: var(--neo-accent-hover);
+}
+
+.neo-btn-amber {
+  background-color: var(--neo-amber);
+  color: #121212;
+}
+
+.neo-btn-amber:hover {
+  background-color: #d97706;
+  color: #ffffff;
+}
+
+.neo-btn-emerald {
+  background-color: var(--neo-emerald);
+  color: #ffffff;
+}
+
+.neo-btn-emerald:hover {
+  background-color: #059669;
+}
+
+.neo-btn-surface {
+  background-color: var(--neo-surface);
+  color: var(--neo-text);
+}
+
+.neo-btn-surface:hover {
+  background-color: var(--neo-surface-subtle);
+}
+
+/* Neo-Brutalist Badges */
+.neo-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  padding: 0.25rem 0.625rem;
+  border: 2px solid var(--neo-border);
+  box-shadow: 2px 2px 0px var(--neo-shadow);
+}
+
+.neo-badge-accent {
+  background-color: var(--neo-accent);
+  color: #ffffff;
+}
+
+.neo-badge-amber {
+  background-color: var(--neo-amber);
+  color: #121212;
+}
+
+.neo-badge-emerald {
+  background-color: var(--neo-emerald);
+  color: #ffffff;
+}
+
+.neo-badge-cyan {
+  background-color: #06b6d4;
+  color: #121212;
+}
+
+/* Dot Grid Background */
+.bg-neo-grid {
+  background-image: radial-gradient(var(--neo-grid-dot) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* Subtle cross pattern */
+.bg-neo-lines {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(120, 120, 120, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120, 120, 120, 0.07) 1px, transparent 1px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neo-bg);
+  border-left: 2px solid var(--neo-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neo-surface-muted);
+  border: 2px solid var(--neo-border);
+  box-shadow: 1px 1px 0px var(--neo-shadow);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neo-accent);
+}
+
+/* Smooth selection */
+::selection {
+  background-color: var(--neo-accent);
+  color: #ffffff;
+}
+
+/* Responsive Navbar Resume Button (Strictly hidden on 375px and down) */
+.nav-resume-btn {
+  display: none !important;
+}
+
+@media (min-width: 376px) {
+  .nav-resume-btn {
+    display: inline-flex !important;
+  }
+}
+
+/* Dynamic Neo-Brutalist Animation Effects */
+@keyframes neoFloatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1.5deg);
+  }
+}
+
+@keyframes neoFloatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(1.5deg);
+  }
+}
+
+@keyframes neoShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes neoGlowPulse {
+  0%, 100% {
+    box-shadow: 3px 3px 0px var(--neo-shadow);
+  }
+  50% {
+    box-shadow: 5px 5px 0px var(--neo-shadow), 0 0 15px rgba(99, 102, 241, 0.25);
+  }
+}
+
+.animate-neo-float-1 {
+  animation: neoFloatSlow 4s ease-in-out infinite;
+}
+
+.animate-neo-float-2 {
+  animation: neoFloatReverse 4.5s ease-in-out infinite;
+}
+
+.animate-neo-float-3 {
+  animation: neoFloatSlow 5s ease-in-out infinite 0.5s;
+}
+
+.animate-neo-shimmer {
+  animation: neoShimmer 3s infinite linear;
+}
+
+.neo-interactive-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }

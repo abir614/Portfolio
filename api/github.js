@@ -1,4 +1,6 @@
+/* global process */
 export default async function handler(req, res) {
+
   try {
     // If the token isn't set, we can still fall back to the public API
     const token = process.env.GITHUB_PAT;
