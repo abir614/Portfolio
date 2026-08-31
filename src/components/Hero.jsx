@@ -166,7 +166,7 @@ export default function Hero() {
             <div className="hero-badge flex flex-wrap items-center gap-1.5 sm:gap-3 mb-3 sm:mb-4">
               <span className="neo-badge neo-badge-emerald rounded-full text-[9px] xs:text-[10px] sm:text-xs 2xl:text-sm 2xl:px-4 2xl:py-1.5 hover:scale-105 transition-transform cursor-default">
                 <span className="w-2 h-2 rounded-full bg-white animate-ping mr-1.5 inline-block"></span>
-                Frontend Dev @ Pixelora Studio
+                Jr. Frontend Dev @ Pixelora Studio
               </span>
               <span className="neo-badge rounded-full bg-[var(--neo-surface-subtle)] text-[var(--neo-text-muted)] text-[9px] xs:text-[10px] sm:text-xs 2xl:text-sm 2xl:px-4 2xl:py-1.5 hover:scale-105 transition-transform cursor-default">
                 Dhaka, Bangladesh
@@ -177,7 +177,7 @@ export default function Hero() {
             <div className="hero-title space-y-1 sm:space-y-1.5 mb-4 sm:mb-5">
               <p className="font-mono text-[11px] sm:text-sm 2xl:text-base font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                // FULL STACK & DEVOPS ENGINEER
+                // JR. FRONTEND DEVELOPER & SYSTEMS ENTHUSIAST
               </p>
               <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-black text-[var(--neo-text)] tracking-tight leading-[1.16]">
                 Hi, I'm{" "}
@@ -186,7 +186,7 @@ export default function Hero() {
                     ref={nameBadgeRef}
                     className="relative z-10 px-2.5 sm:px-3.5 2xl:px-5 py-0.5 bg-amber-400 dark:bg-amber-500 text-black border-2 sm:border-3 border-[var(--neo-border)] shadow-[3px_3px_0px_var(--neo-shadow)] 2xl:shadow-[5px_5px_0px_var(--neo-shadow)] rounded-lg sm:rounded-xl font-black inline-flex items-center gap-1.5 cursor-pointer transition-all duration-300 group-hover:-translate-y-1 group-hover:rotate-[-2deg] group-hover:shadow-[6px_6px_0px_var(--neo-shadow)] overflow-hidden"
                   >
-                    <span className="relative z-10">Salman Toha</span>
+                    <span className="relative z-10">Shahriar Mahmud Abir</span>
                     {/* Shimmer Light Flare */}
                     <span className="absolute top-0 left-0 w-1/2 h-full bg-white/30 skew-x-12 animate-neo-shimmer pointer-events-none" />
                   </span>
@@ -205,7 +205,7 @@ export default function Hero() {
                 </div>
                 <span className="font-mono text-[9px] xs:text-[10px] sm:text-xs font-bold text-[var(--neo-text-muted)] group-hover:text-indigo-600 dark:group-hover:text-indigo-400 flex items-center gap-1.5 transition-colors">
                   <FiTerminal className="text-indigo-500 group-hover:rotate-12 transition-transform" />
-                  bash • salman@pixelora:~ (prod)
+                  bash • abir@pixelora:~ (prod)
                 </span>
               </div>
 
@@ -214,17 +214,17 @@ export default function Hero() {
                 <span className="text-emerald-500 font-bold select-none group-hover:translate-x-1 transition-transform inline-block flex-shrink-0">&gt;_</span>
                 <TypeAnimation
                   sequence={[
-                    "Frontend Dev @ Pixelora Studio",
+                    "Jr. Frontend Dev @ Pixelora Studio",
                     2200,
-                    "Custom Server & Linux VPS DevOps",
+                    "React.js, Next.js & TypeScript",
                     2200,
-                    "MERN Stack & Next.js Architect",
+                    "Shopify Storefronts & Headless CMS",
                     2200,
-                    "GitHub Actions CI/CD Specialist",
+                    "Linux SysAdmin & VPS Hosting",
                     2200,
-                    "Wix & Shopify Headless Dev",
+                    "Docker & Load Balancing Infra",
                     2200,
-                    "React Native Mobile Engineer",
+                    "OpenWrt, VLANs & Serverless DNS",
                     2200,
                   ]}
                   wrapper="span"
@@ -237,7 +237,7 @@ export default function Hero() {
 
             {/* Bio Paragraph (With dedicated breathing room) */}
             <p className="hero-bio text-xs sm:text-base lg:text-lg 2xl:text-xl text-[var(--neo-text-muted)] leading-relaxed font-normal mb-5 sm:mb-6 text-left">
-              Frontend Developer at <strong className="text-[var(--neo-text)] font-semibold">Pixelora Studio (Betopia Group)</strong> and Full Stack & DevOps enthusiast. Crafting resilient web applications, custom self-hosted server infrastructure (<strong className="text-[var(--neo-text)] font-semibold">Docker, Linux VPS, Nginx, Cloudflare Tunnels</strong>), and automated <strong className="text-[var(--neo-text)] font-semibold">GitHub Actions CI/CD pipelines</strong>.
+              Junior Frontend Developer at <strong className="text-[var(--neo-text)] font-semibold">Pixelora Studio (Betopia Group)</strong> building high-performance web applications with <strong className="text-[var(--neo-text)] font-semibold">React, Next.js, and TypeScript</strong>. Alongside frontend work, deeply experienced in Linux systems administration, networking (<strong className="text-[var(--neo-text)] font-semibold">OpenWrt, VLANs, DNS</strong>), and Docker-based infrastructure with load balancing.
             </p>
 
             {/* Education & Current Role Credentials */}
@@ -245,13 +245,13 @@ export default function Hero() {
               <div className="flex items-start gap-2 bg-[var(--neo-surface-subtle)] p-2.5 sm:p-3 2xl:p-3.5 rounded-xl border border-[var(--neo-border-subtle)] hover:border-[var(--neo-border)] transition-colors">
                 <FiBriefcase className="text-emerald-500 text-sm sm:text-base 2xl:text-lg mt-0.5 flex-shrink-0" />
                 <span className="leading-snug">
-                  <strong>Pixelora Studio</strong> (Betopia Group) — <em>Frontend Dev</em> (Apr 2024 — Present)
+                  <strong>Pixelora Studio</strong> (Betopia Group) — <em>Jr. Frontend Dev</em> (April 2026 — Present)
                 </span>
               </div>
               <div className="flex items-start gap-2 bg-[var(--neo-surface-subtle)] p-2.5 sm:p-3 2xl:p-3.5 rounded-xl border border-[var(--neo-border-subtle)] hover:border-[var(--neo-border)] transition-colors">
                 <span className="text-sm sm:text-base 2xl:text-lg">🎓</span>
                 <span className="leading-snug">
-                  <strong>Daffodil International University</strong> — BSc CSE (4th Year) • GPA: <strong>4.95 / 5.00</strong>
+                  <strong>National Institute of Fashion Technology</strong> — BSc in Apparel Manufacturing & Technology • Dhaka 1212
                 </span>
               </div>
             </div>
@@ -275,35 +275,35 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Card 2: Custom HomeLab Server */}
+              {/* Card 2: Linux & Networking */}
               <div className="hero-stats-item neo-box-sm bg-[var(--neo-surface)] p-2 sm:p-3 2xl:p-4 rounded-xl text-center flex flex-col justify-between hover:-translate-y-1.5 hover:shadow-[4px_4px_0px_#10b981] hover:border-emerald-600 transition-all cursor-pointer group">
                 <div className="flex items-center justify-between pb-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
                   <span className="text-[7px] xs:text-[8px] sm:text-[9px] font-mono font-bold uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-1 py-0.2 rounded border border-emerald-200 dark:border-emerald-800 flex items-center gap-0.5">
-                    <FiActivity className="animate-spin" /> Live
+                    <FiActivity className="animate-spin" /> Active
                   </span>
                 </div>
                 <div className="text-base sm:text-2xl 2xl:text-3xl font-black font-display text-emerald-600 dark:text-emerald-400 leading-tight group-hover:scale-105 transition-transform">
-                  HomeLab
+                  Networks
                 </div>
                 <div className="text-[8px] xs:text-[9px] sm:text-xs 2xl:text-sm font-mono font-bold text-[var(--neo-text-muted)] uppercase tracking-tight mt-0.5">
-                  Self-Built Lab
+                  OpenWrt • Linux
                 </div>
               </div>
 
-              {/* Card 3: CI/CD GitHub Actions */}
+              {/* Card 3: Cloud & Edge */}
               <div className="hero-stats-item neo-box-sm bg-[var(--neo-surface)] p-2 sm:p-3 2xl:p-4 rounded-xl text-center flex flex-col justify-between hover:-translate-y-1.5 hover:shadow-[4px_4px_0px_#f59e0b] hover:border-amber-500 transition-all cursor-pointer group">
                 <div className="flex items-center justify-between pb-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500 group-hover:scale-150 transition-transform"></span>
                   <span className="text-[7px] xs:text-[8px] sm:text-[9px] font-mono font-bold uppercase text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-1 py-0.2 rounded border border-amber-200 dark:border-amber-800">
-                    Auto
+                    Live
                   </span>
                 </div>
                 <div className="text-base sm:text-2xl 2xl:text-3xl font-black font-display text-amber-500 leading-tight group-hover:scale-105 transition-transform">
-                  CI/CD
+                  Cloudflare
                 </div>
                 <div className="text-[8px] xs:text-[9px] sm:text-xs 2xl:text-sm font-mono font-bold text-[var(--neo-text-muted)] uppercase tracking-tight mt-0.5">
-                  GitHub Actions
+                  DoH • Edge AI
                 </div>
               </div>
 
@@ -312,7 +312,7 @@ export default function Hero() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 2xl:gap-4">
               <a
-                href="https://drive.google.com/file/d/1UIIg4Ku7gEiFIh7uSycBlVrCzGkYHIbW/view"
+                href="https://drive.google.com/file/d/1obYzeaGVfZ-HkUJc5bjrhT9JEd0Z3pbu/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hero-cta-btn neo-btn neo-btn-primary rounded-xl text-xs sm:text-sm 2xl:text-base py-2.5 sm:py-3 2xl:py-3.5 px-4 sm:px-6 2xl:px-8 text-center hover:scale-103 transition-transform"
@@ -321,7 +321,7 @@ export default function Hero() {
                 <span>See Resume</span>
               </a>
               <a
-                href="https://github.com/TheLunatic1"
+                href="https://github.com/abir614"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hero-cta-btn neo-btn neo-btn-surface rounded-xl text-xs sm:text-sm 2xl:text-base py-2.5 sm:py-3 2xl:py-3.5 px-4 sm:px-6 2xl:px-8 text-center hover:scale-103 transition-transform"
@@ -365,16 +365,16 @@ export default function Hero() {
                   </div>
                   <span className="font-mono text-[10px] sm:text-xs 2xl:text-sm font-bold text-[var(--neo-text-muted)] flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
-                    salman_toha.profile
+                    abir_profile.sh
                   </span>
                 </div>
 
                 {/* Profile Image with Sharp Frame & Hover Zoom */}
                 <div className="relative aspect-square overflow-hidden rounded-xl border-2 border-[var(--neo-border)] bg-[var(--neo-surface-subtle)] group">
                   <img
-                    src="https://github.com/TheLunatic1.png"
-                    alt="Salman Toha - Full Stack & DevOps Engineer"
-                    className="w-full h-full object-cover grayscale-[10%] contrast-[105%] group-hover:grayscale-0 group-hover:scale-108 transition-all duration-700 ease-out"
+                    src="/avatar-placeholder.svg"
+                    alt="Shahriar Mahmud Abir - Jr. Frontend Developer"
+                    className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105"
                     loading="eager"
                   />
                   
@@ -383,7 +383,7 @@ export default function Hero() {
                     <div className="flex items-center gap-1.5">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                       <span className="font-mono text-[10px] sm:text-xs 2xl:text-sm font-bold text-[var(--neo-text)]">
-                        @TheLunatic1
+                        @abir614
                       </span>
                     </div>
                     <span className="text-[8px] sm:text-[10px] 2xl:text-xs font-mono uppercase bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-black px-1.5 py-0.5 rounded border border-emerald-300 dark:border-emerald-800 flex items-center gap-1">
@@ -400,7 +400,7 @@ export default function Hero() {
                 style={{ transform: "translateZ(30px)" }}
               >
                 <SiDocker className="text-[10px] sm:text-xs text-blue-900" />
-                <span className="font-bold font-mono">Docker & VPS</span>
+                <span className="font-bold font-mono">Docker & Cloudflare</span>
               </div>
 
               <div
@@ -408,7 +408,7 @@ export default function Hero() {
                 style={{ transform: "translateZ(35px)" }}
               >
                 <SiReact className="text-[10px] sm:text-xs text-cyan-300 animate-spin" style={{ animationDuration: "12s" }} />
-                <span className="font-bold font-mono">React 19 & Next.js</span>
+                <span className="font-bold font-mono">React.js & Next.js</span>
               </div>
 
               <div
@@ -416,7 +416,7 @@ export default function Hero() {
                 style={{ transform: "translateZ(40px)" }}
               >
                 <SiLinux className="text-[10px] sm:text-xs" />
-                <span className="font-bold font-mono">Linux & Nginx</span>
+                <span className="font-bold font-mono">Linux & OpenWrt</span>
               </div>
 
             </div>

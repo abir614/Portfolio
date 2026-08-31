@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { FaLinkedinIn, FaXTwitter, FaFacebook, FaYoutube, FaGithub, FaWhatsapp, FaEnvelope, FaPhone } from "react-icons/fa6";
+import { FaLinkedinIn, FaXTwitter, FaFacebook, FaYoutube, FaGithub, FaWhatsapp, FaEnvelope, FaPhone, FaGlobe } from "react-icons/fa6";
 import { FiCopy, FiCheck, FiSend, FiFileText, FiMapPin } from "react-icons/fi";
 import { gsap, useGSAP } from "../../lib/gsap";
 
@@ -8,9 +8,9 @@ export default function Contact() {
   const [copiedPhone, setCopiedPhone] = useState(false);
   const sectionRef = useRef(null);
 
-  const email = "ishrak1846@gmail.com";
-  const phone = "+8801780106916";
-  const phoneFormatted = "+880 1780 106916";
+  const email = "shahriarabir310@gmail.com";
+  const phone = "+8801600015310";
+  const phoneFormatted = "+880 1600 015310";
 
   const handleCopy = (text, type) => {
     navigator.clipboard.writeText(text);
@@ -88,7 +88,7 @@ export default function Contact() {
             Let's Build Something Resilient
           </h2>
           <p className="text-xs sm:text-base lg:text-lg 2xl:text-xl text-[var(--neo-text-muted)]">
-            Open for frontend & full-stack development roles, self-hosted DevOps architectures, and engineering collaborations.
+            Open for frontend engineering roles, Shopify theme development, and networking/infrastructure collaborations.
           </p>
         </div>
 
@@ -184,10 +184,10 @@ export default function Contact() {
                   Based in Dhaka
                 </h3>
                 <p className="text-[11px] sm:text-xs font-mono text-[var(--neo-text-muted)] mb-3">
-                  Aftabnagar, Badda, Dhaka, Bangladesh
+                  74 C/A Wireless Gate, Dhaka 1212, Bangladesh
                 </p>
                 <p className="text-[11px] sm:text-xs text-[var(--neo-text)] leading-relaxed bg-[var(--neo-surface-subtle)] p-3 rounded-xl border border-[var(--neo-border-subtle)] mb-4">
-                  Available for Remote, On-Site, Hybrid, Full-Time &amp; Freelance roles worldwide.
+                  Available for Remote, Hybrid, On-Site, Full-Time &amp; Freelance engineering roles worldwide.
                 </p>
               </div>
               <div className="neo-badge neo-badge-amber rounded-lg py-1.5 text-center justify-center text-[10px]">
@@ -198,7 +198,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Social Media Channels Grid (2 per line on mobile, 3 on tablet, 6 on desktop) */}
+        {/* Social Media Channels Grid */}
         <div className="contact-socials-wrapper mb-14 sm:mb-20">
           <div className="neo-box rounded-2xl p-5 sm:p-8 lg:p-10 bg-[var(--neo-surface)]">
             <div className="text-center mb-6 sm:mb-8">
@@ -206,18 +206,16 @@ export default function Contact() {
                 Find Me Across The Web
               </h3>
               <p className="text-xs sm:text-sm text-[var(--neo-text-muted)] mt-1.5">
-                Connect with me on professional networks, code repos, and social channels.
+                Connect with me on professional networks, code repositories, and channels.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
               {[
-                { label: "LinkedIn", icon: FaLinkedinIn, href: "https://www.linkedin.com/in/salman-toha/", color: "hover:bg-blue-600 hover:text-white" },
-                { label: "GitHub", icon: FaGithub, href: "https://github.com/TheLunatic1", color: "hover:bg-slate-900 hover:text-white" },
-                { label: "WhatsApp", icon: FaWhatsapp, href: "https://wa.me/8801780106916", color: "hover:bg-green-600 hover:text-white" },
-                { label: "X / Twitter", icon: FaXTwitter, href: "https://x.com/SalmanToha_", color: "hover:bg-black hover:text-white" },
-                { label: "Facebook", icon: FaFacebook, href: "https://facebook.com/mac.ishrak.1846", color: "hover:bg-blue-700 hover:text-white" },
-                { label: "YouTube", icon: FaYoutube, href: "https://youtube.com", color: "hover:bg-red-600 hover:text-white" },
+                { label: "LinkedIn", icon: FaLinkedinIn, href: "https://linkedin.com/in/shahriar-mahmud-abir", color: "hover:bg-blue-600 hover:text-white" },
+                { label: "GitHub", icon: FaGithub, href: "https://github.com/abir614", color: "hover:bg-slate-900 hover:text-white" },
+                { label: "WhatsApp", icon: FaWhatsapp, href: "https://wa.me/8801600015310", color: "hover:bg-green-600 hover:text-white" },
+                { label: "Fly.io Live", icon: FaGlobe, href: "https://abir.fly.dev", color: "hover:bg-violet-600 hover:text-white" },
               ].map((social, idx) => (
                 <a
                   key={idx}
@@ -244,7 +242,7 @@ export default function Contact() {
             <span>Send An Email</span>
           </a>
           <a
-            href="https://drive.google.com/file/d/1UIIg4Ku7gEiFIh7uSycBlVrCzGkYHIbW/view"
+            href="https://drive.google.com/file/d/1obYzeaGVfZ-HkUJc5bjrhT9JEd0Z3pbu/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="neo-btn neo-btn-amber rounded-xl px-7 sm:px-10 py-3.5 text-xs sm:text-base flex items-center justify-center gap-2.5 w-full sm:w-auto"

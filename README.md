@@ -1,8 +1,8 @@
-# Salman Toha — Full Stack & DevOps Engineer Portfolio
+# Shahriar Mahmud Abir — Jr. Frontend Developer Portfolio
 
 A modern, high-performance personal portfolio featuring a **Minimal Neo-Brutalism** design aesthetic, styled with **Tailwind CSS 4**, animated with **GSAP (GreenSock Animation Platform) + ScrollTrigger**, and enhanced with 3D models via **Three.js / React Three Fiber**.
 
-**Live Demo** → [salmantoha.vercel.app](https://salmantoha.vercel.app/)
+**Live Demo** → [abir.fly.dev](https://abir.fly.dev/)
 
 ---
 
@@ -14,13 +14,12 @@ A modern, high-performance personal portfolio featuring a **Minimal Neo-Brutalis
 ---
 
 ### Core Skill Categories
-1. **DevOps & Infrastructure**: Docker, Docker Compose, Linux VPS (Ubuntu/Debian), Nginx Reverse Proxy, PM2 Process Manager, Cloudflare Tunnels, ZeroTier Mesh Network, GitHub Actions CI/CD, SSH Hardening, KVM / QEMU.
-2. **Frontend Development**: React 19, Next.js, TypeScript, JavaScript, Tailwind CSS 4, GSAP & Framer Motion, Three.js, React Router, React Hook Form, Swiper Slider.
-3. **Mobile Development**: React Native, Expo SDK, Android & iOS cross-platform.
-4. **Backend & APIs**: Node.js, Express.js, MongoDB, Firebase, JWT Authentication, RESTful APIs, Axios, Resend.
-5. **Tools & Platforms**: Git, GitHub, Vercel, Netlify, Postman, Wix CMS.
-6. **Computer Science & Languages**: C, C++, Python, Java, Problem Solving / DSA, IoT & Arduino, AI & ML fundamentals.
-7. **Soft Skills**: Technical Leadership, Team Collaboration, Agile Time Management.
+1. **Frontend Development**: React.js, Next.js, TypeScript, JavaScript, Three.js, Tailwind CSS 4, GSAP & Framer Motion, DaisyUI, Responsive UI.
+2. **Backend & APIs**: Node.js, Python, MongoDB, PostgreSQL, JWT Auth, REST APIs, GraphQL, Socket.IO, Axios, Express 5.
+3. **DevOps & Automation**: Docker, Docker Compose (Multi-Layer Builds & Port Forwarding), GitHub Actions, Fly.io, Vercel, Netlify.
+4. **Networking & Infrastructure**: Linux OS Admin, OpenWrt (Firewall, DHCP, VLAN & Subnet Management, Per-User Port Access Control), SSH Admin, VPS Hosting, NGINX Setup & Load Balancing, Cloudflare Workers & Tunnels, Serverless DNS (DoH, DNSSEC), ZeroTier.
+5. **CMS & Headless Storefronts**: Shopify, Shopify Headless, Liquid, WordPress.
+6. **CS & Tools**: Git, GitHub, Python, Google Colab, IoT & Arduino, AI & ML, Problem Solving.
 
 ---
 
@@ -31,7 +30,7 @@ A modern, high-performance personal portfolio featuring a **Minimal Neo-Brutalis
 - **3D Graphics**: Three.js + @react-three/fiber + @react-three/drei
 - **Icons**: React Icons (`react-icons/si`, `react-icons/fa6`, `react-icons/fi`)
 - **Typewriter**: `react-type-animation`
-- **Deployment**: Vercel Serverless Functions (`api/github.js`) + Edge Network
+- **Deployment**: Vercel / Fly.io
 
 ---
 
@@ -70,8 +69,8 @@ src/
 
 ```bash
 # Clone repository
-git clone https://github.com/TheLunatic1/Portfolio-Salman-Toha.git
-cd Portfolio-Salman-Toha
+git clone https://github.com/abir614/Portfolio-Shahriar-Abir.git
+cd Portfolio-Shahriar-Abir
 
 # Install dependencies
 npm install
@@ -88,4 +87,4 @@ npm run lint
 
 ---
 
-© Salman Toha. Crafted with precision, high performance, and passion.
+© Shahriar Mahmud Abir. Crafted with precision, high performance, and passion.

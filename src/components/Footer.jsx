@@ -27,10 +27,10 @@ export default function Footer() {
             </div>
             <div>
               <span className="font-display font-black text-base sm:text-xl 2xl:text-2xl tracking-tight text-[var(--neo-text)] block leading-tight">
-                Salman Toha
+                Shahriar Mahmud Abir
               </span>
               <span className="text-[11px] sm:text-xs 2xl:text-sm font-mono text-[var(--neo-text-muted)]">
-                Frontend Dev @ Pixelora Studio • Full Stack & DevOps Engineer
+                Jr. Frontend Developer @ Pixelora Studio • Systems &amp; Networking Enthusiast
               </span>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function Footer() {
 
         {/* Bottom Row: Centered Copyright */}
         <div className="text-center text-xs 2xl:text-sm font-mono text-[var(--neo-text-muted)]">
-          © {new Date().getFullYear()} Salman Toha. Built with React 19, Tailwind CSS 4 &amp; GSAP.
+          © {new Date().getFullYear()} Shahriar Mahmud Abir. Built with React 19, Tailwind CSS 4 &amp; GSAP.
         </div>
 
       </div>

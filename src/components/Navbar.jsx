@@ -106,11 +106,11 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col justify-center">
               <span className="font-display font-black text-sm xs:text-base sm:text-lg tracking-tight block text-[var(--neo-text)] group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-tight whitespace-nowrap">
-                Salman Toha
+                Shahriar Abir
               </span>
               <span className="hidden sm:inline-flex items-center gap-1 text-[10px] sm:text-xs font-mono text-[var(--neo-text-muted)] font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                Full Stack & DevOps
+                Jr. Frontend Developer
               </span>
             </div>
           </button>
@@ -132,7 +132,7 @@ export default function Navbar() {
           <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
             {/* Resume Button with responsive media query class */}
             <a
-              href="https://drive.google.com/file/d/1UIIg4Ku7gEiFIh7uSycBlVrCzGkYHIbW/view"
+              href="https://drive.google.com/file/d/1obYzeaGVfZ-HkUJc5bjrhT9JEd0Z3pbu/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="nav-resume-btn neo-btn neo-btn-amber rounded-lg sm:rounded-xl text-[11px] xs:text-xs sm:text-sm py-1.5 px-2.5 sm:px-3.5 flex items-center gap-1.5 whitespace-nowrap"
@@ -178,7 +178,7 @@ export default function Navbar() {
             </nav>
             <div className="pt-2 border-t border-[var(--neo-border-subtle)] flex flex-col gap-2">
               <a
-                href="https://drive.google.com/file/d/1UIIg4Ku7gEiFIh7uSycBlVrCzGkYHIbW/view"
+                href="https://drive.google.com/file/d/1obYzeaGVfZ-HkUJc5bjrhT9JEd0Z3pbu/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="neo-btn neo-btn-amber rounded-lg py-2 text-xs font-mono font-bold flex items-center justify-center gap-1.5"

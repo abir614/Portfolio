@@ -2,62 +2,40 @@ import { useRef, useState } from "react";
 import Local3D from "../Local3D";
 import {
   SiReact, SiNextdotjs, SiJavascript, SiTailwindcss, SiDaisyui,
-  SiFramer, SiFirebase, SiMongodb, SiNodedotjs, SiExpress,
+  SiFramer, SiMongodb, SiNodedotjs, SiExpress, SiPostgresql, SiGraphql, SiSocketdotio,
   SiReactrouter, SiReacthookform, SiSwiper, SiVercel, SiNetlify,
-  SiJsonwebtokens, SiChartdotjs, SiGithub, SiGit, SiCss3,
-  SiArduino, SiPython, SiC, SiCplusplus, SiTypescript, SiLinux,
-  SiNginx, SiWix, SiPm2, SiThreedotjs, SiDocker,
+  SiJsonwebtokens, SiGithub, SiCss3, SiWordpress,
+  SiArduino, SiPython, SiTypescript, SiLinux,
+  SiNginx, SiThreedotjs, SiDocker,
   SiCloudflare, SiZerotier, SiGithubactions, SiGnubash, SiPostman,
-  SiShopify, SiN8N, SiProxmox
+  SiShopify, SiGooglecolab
 } from "react-icons/si";
 import { GiArtificialIntelligence } from "react-icons/gi";
 import { DiResponsive } from "react-icons/di";
 import { PiMathOperations } from "react-icons/pi";
-import { TbRouteSquare } from "react-icons/tb";
-import { FaHtml5, FaHeadset, FaMobileAlt, FaBox, FaGlobe, FaEnvelope, FaServer } from "react-icons/fa";
+import { FaHtml5, FaGlobe, FaServer, FaNetworkWired } from "react-icons/fa";
 import { FcCollaboration } from "react-icons/fc";
 import { CiTimer } from "react-icons/ci";
 import { gsap, useGSAP } from "../../lib/gsap";
 
 const skillSections = [
   {
-    id: "devops",
-    title: "DevOps & Infrastructure",
-    badge: "Specialized Stack",
-    badgeColor: "neo-badge-cyan",
-    description: "Custom physical server, Docker containers, Linux orchestration, automated CI/CD, and zero-trust private networking.",
-    skills: [
-      { name: "Docker", icon: SiDocker, color: "text-blue-500" },
-      { name: "Docker Compose", icon: SiDocker, color: "text-sky-400" },
-      { name: "HomeLab Server", icon: FaServer, color: "text-emerald-500" },
-      { name: "Linux VPS", icon: SiLinux, color: "text-amber-500" },
-      { name: "GitHub Actions", icon: SiGithubactions, color: "text-blue-400" },
-      { name: "Nginx Proxy", icon: SiNginx, color: "text-emerald-500" },
-      { name: "PM2 Manager", icon: SiPm2, color: "text-indigo-500" },
-      { name: "Cloudflare Tunnels", icon: SiCloudflare, color: "text-orange-500" },
-      { name: "ZeroTier Mesh", icon: SiZerotier, color: "text-amber-400" },
-      { name: "n8n Automation", icon: SiN8N, color: "text-rose-500" },
-      { name: "SSH Hardening", icon: SiGnubash, color: "text-emerald-400" },
-      { name: "Proxmox / KVM", icon: SiProxmox, color: "text-orange-600" },
-    ]
-  },
-  {
     id: "frontend",
     title: "Frontend Development",
     badge: "Core Expertise",
     badgeColor: "neo-badge-accent",
-    description: "Modern, dynamic, and responsive user interfaces built with React, Next.js, and interactive animations.",
+    description: "High-performance, pixel-perfect web interfaces and applications built with React, Next.js, TypeScript, and interactive animations.",
     skills: [
       { name: "React.js", type: "local", model: "/models/react.glb", glow: "#61dafb", scale: 0.5 },
       { name: "Next.js", icon: SiNextdotjs, color: "text-[var(--neo-text)]" },
       { name: "TypeScript", icon: SiTypescript, color: "text-blue-500" },
       { name: "JavaScript", icon: SiJavascript, color: "text-yellow-400" },
+      { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-teal-400" },
+      { name: "Three.js", icon: SiThreedotjs, color: "text-[var(--neo-text)]" },
       { name: "HTML5", icon: FaHtml5, color: "text-orange-500" },
       { name: "CSS3", icon: SiCss3, color: "text-blue-500" },
-      { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-teal-400" },
       { name: "DaisyUI", icon: SiDaisyui, color: "text-teal-300" },
       { name: "GSAP & Motion", icon: SiFramer, color: "text-fuchsia-500" },
-      { name: "Three.js", icon: SiThreedotjs, color: "text-[var(--neo-text)]" },
       { name: "React Router", icon: SiReactrouter, color: "text-red-500" },
       { name: "React Hook Form", icon: SiReacthookform, color: "text-pink-500" },
       { name: "Swiper Slider", icon: SiSwiper, color: "text-blue-400" },
@@ -65,89 +43,85 @@ const skillSections = [
     ]
   },
   {
-    id: "cms",
-    title: "CMS & Headless E-Commerce",
-    badge: "Headless & Studio",
-    badgeColor: "neo-badge-emerald",
-    description: "Modern headless content management systems, custom Wix Studio / Velo development, and Shopify headless storefronts.",
+    id: "networking",
+    title: "Networking & Infrastructure",
+    badge: "Specialized Stack",
+    badgeColor: "neo-badge-cyan",
+    description: "Linux systems administration, OpenWrt firewall routing, VLAN management, Serverless DNS (DoH), and NGINX load balancing.",
     skills: [
-      { name: "Wix Studio", icon: SiWix, color: "text-[var(--neo-text)]" },
-      { name: "Wix Headless", icon: SiWix, color: "text-indigo-400" },
-      { name: "Wix Velo", icon: SiWix, color: "text-amber-400" },
-      { name: "Shopify Headless", icon: SiShopify, color: "text-emerald-500" },
-      { name: "Headless CMS", icon: SiNextdotjs, color: "text-sky-400" },
-    ]
-  },
-  {
-    id: "mobile",
-    title: "Mobile Development",
-    badge: "Cross-Platform",
-    badgeColor: "neo-badge-amber",
-    description: "Native cross-platform mobile applications for iOS and Android with fast performance and offline sync.",
-    skills: [
-      { name: "React Native", icon: FaMobileAlt, color: "text-blue-400" },
-      { name: "Expo SDK", icon: FaBox, color: "text-indigo-400" },
-      { name: "Expo SDK 54", icon: FaBox, color: "text-emerald-400" },
+      { name: "Linux OS Admin", icon: SiLinux, color: "text-amber-500" },
+      { name: "OpenWrt Routing", icon: FaNetworkWired, color: "text-cyan-500" },
+      { name: "VLAN & Subnets", icon: FaServer, color: "text-emerald-400" },
+      { name: "Serverless DNS", icon: SiCloudflare, color: "text-orange-400" },
+      { name: "NGINX Balancing", icon: SiNginx, color: "text-emerald-500" },
+      { name: "Cloudflare Tunnels", icon: SiCloudflare, color: "text-orange-500" },
+      { name: "ZeroTier Mesh", icon: SiZerotier, color: "text-amber-400" },
+      { name: "SSH Admin", icon: SiGnubash, color: "text-emerald-400" },
+      { name: "VPS Hosting", icon: FaServer, color: "text-indigo-400" },
+      { name: "Port Security", icon: SiGnubash, color: "text-rose-400" },
     ]
   },
   {
     id: "backend",
     title: "Backend & APIs",
-    badge: "High Performance",
-    badgeColor: "neo-badge-cyan",
-    description: "Robust, secure backend architectures, RESTful API design, and database persistence.",
+    badge: "Full Stack & Edge",
+    badgeColor: "neo-badge-accent",
+    description: "Scalable server architectures, GraphQL & REST APIs, edge databases, WebSockets, and hardened cryptographic authentication.",
     skills: [
       { name: "Node.js", icon: SiNodedotjs, color: "text-green-500" },
-      { name: "Express.js", icon: SiExpress, color: "text-slate-400" },
+      { name: "Express 5", icon: SiExpress, color: "text-slate-400" },
       { name: "MongoDB", icon: SiMongodb, color: "text-green-400" },
-      { name: "Firebase", icon: SiFirebase, color: "text-yellow-500" },
-      { name: "JWT Auth", icon: SiJsonwebtokens, color: "text-pink-500" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "text-sky-500" },
+      { name: "GraphQL", icon: SiGraphql, color: "text-pink-500" },
       { name: "REST APIs", icon: PiMathOperations, color: "text-blue-400" },
-      { name: "Protected Routes", icon: TbRouteSquare, color: "text-orange-400" },
-      { name: "Chart.js", icon: SiChartdotjs, color: "text-rose-400" },
+      { name: "JWT Auth", icon: SiJsonwebtokens, color: "text-purple-400" },
+      { name: "Socket.IO", icon: SiSocketdotio, color: "text-[var(--neo-text)]" },
       { name: "Axios", icon: FaGlobe, color: "text-purple-500" },
-      { name: "Resend", icon: FaEnvelope, color: "text-red-400" },
     ]
   },
   {
-    id: "tools",
-    title: "Tools, Workflow & Automation",
-    badge: "Productivity",
-    badgeColor: "neo-badge-accent",
-    description: "Version control, automated pipelines, cloud platforms, and developer tooling.",
+    id: "devops",
+    title: "DevOps & Automation",
+    badge: "Cloud & Pipelines",
+    badgeColor: "neo-badge-emerald",
+    description: "Docker multi-layer builds, automated GitHub Actions CI/CD pipelines, and cloud platform deployment.",
     skills: [
-      { name: "n8n Pipelines", icon: SiN8N, color: "text-rose-500" },
-      { name: "Git", type: "local", model: "/models/git.glb", glow: "#f05032", scale: 1.5 },
-      { name: "GitHub", icon: SiGithub, color: "text-[var(--neo-text)]" },
+      { name: "Docker", icon: SiDocker, color: "text-blue-500" },
+      { name: "Docker Compose", icon: SiDocker, color: "text-sky-400" },
+      { name: "GitHub Actions", icon: SiGithubactions, color: "text-blue-400" },
+      { name: "Fly.io", icon: FaServer, color: "text-violet-500" },
       { name: "Vercel", icon: SiVercel, color: "text-[var(--neo-text)]" },
       { name: "Netlify", icon: SiNetlify, color: "text-cyan-400" },
       { name: "Postman", icon: SiPostman, color: "text-orange-500" },
     ]
   },
   {
-    id: "cs",
-    title: "CS Fundamentals & Languages",
-    badge: "Computer Science",
+    id: "cms",
+    title: "CMS & E-Commerce",
+    badge: "Storefront Solutions",
     badgeColor: "neo-badge-amber",
-    description: "Core algorithms, data structures, and foundational programming languages.",
+    description: "Custom Shopify Liquid theme development, headless Shopify Storefront API integrations, and WordPress CMS.",
     skills: [
-      { name: "C++", type: "local", model: "/models/c.glb", glow: "#004482", scale: 0.05 },
-      { name: "Python", type: "local", model: "/models/python.glb", glow: "#3776ab", scale: 0.05 },
-      { name: "Java", type: "local", model: "/models/java.glb", glow: "#ea2d2e", scale: 0.5 },
-      { name: "Problem Solving", type: "local", model: "/models/problem-solving.glb", glow: "#a855f7", scale: 10 },
-      { name: "C Language", icon: SiC, color: "text-blue-600" },
-      { name: "IoT & Arduino", icon: SiArduino, color: "text-teal-500" },
-      { name: "AI & ML", icon: GiArtificialIntelligence, color: "text-indigo-400" },
+      { name: "Shopify", icon: SiShopify, color: "text-emerald-500" },
+      { name: "Shopify Headless", icon: SiShopify, color: "text-teal-400" },
+      { name: "Liquid Themes", icon: SiShopify, color: "text-emerald-400" },
+      { name: "WordPress", icon: SiWordpress, color: "text-blue-500" },
     ]
   },
   {
-    id: "soft",
-    title: "Soft Skills",
-    badge: "Leadership & Collaboration",
-    badgeColor: "neo-badge-emerald",
-    description: "Communication, engineering collaboration, and agile problem solving.",
+    id: "tools_cs",
+    title: "Tools, CS & Intelligence",
+    badge: "Foundations & AI",
+    badgeColor: "neo-badge-cyan",
+    description: "Version control, Python data tooling, Edge AI/ML, and collaborative engineering workflows.",
     skills: [
-      { name: "Leadership", icon: FaHeadset, color: "text-blue-400" },
+      { name: "Git", type: "local", model: "/models/git.glb", glow: "#f05032", scale: 1.5 },
+      { name: "GitHub", icon: SiGithub, color: "text-[var(--neo-text)]" },
+      { name: "Python", type: "local", model: "/models/python.glb", glow: "#3776ab", scale: 0.05 },
+      { name: "Google Colab", icon: SiGooglecolab, color: "text-amber-500" },
+      { name: "IoT & Arduino", icon: SiArduino, color: "text-teal-500" },
+      { name: "AI & ML", icon: GiArtificialIntelligence, color: "text-indigo-400" },
+      { name: "Problem Solving", type: "local", model: "/models/problem-solving.glb", glow: "#a855f7", scale: 10 },
       { name: "Collaboration", icon: FcCollaboration, color: "text-green-400" },
       { name: "Time Management", icon: CiTimer, color: "text-yellow-400" },
     ]
@@ -215,7 +189,7 @@ export default function Skills() {
             Skills & Infrastructure
           </h2>
           <p className="text-xs sm:text-base lg:text-lg text-[var(--neo-text-muted)]">
-            A comprehensive overview of my technical stack — spanning Full Stack Web & Mobile, CMS & Headless E-Commerce, and Self-Hosted HomeLab DevOps.
+            A comprehensive overview of my technical stack — spanning React/Next.js frontend architectures, Linux & OpenWrt networking, and Docker-based infrastructure.
           </p>
         </div>
 

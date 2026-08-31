@@ -16,7 +16,7 @@ export default function ProjectCard({ repo }) {
   const [imgError, setImgError] = useState(false);
 
   // GitHub preview image attempt
-  const previewImage = `https://raw.githubusercontent.com/TheLunatic1/${repo.name}/main/preview.png`;
+  const previewImage = `https://raw.githubusercontent.com/abir614/${repo.name}/main/preview.png`;
 
   const isPrivate = repo.private;
   const isFeatured =

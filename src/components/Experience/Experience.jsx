@@ -4,76 +4,75 @@ import { gsap, useGSAP } from "../../lib/gsap";
 
 const experiences = [
   {
-    period: "April 15, 2024 — Present",
+    period: "April 2026 — Present",
     category: "Professional Experience",
     badgeColor: "neo-badge-emerald",
-    role: "Frontend Developer",
+    role: "Junior Frontend Developer",
     company: "Pixelora Studio",
-    subtitle: "A concern of Betopia Group • Dhaka, Bangladesh",
+    subtitle: "Betopia Group • Dhaka, Bangladesh",
     description:
-      "Developing high-performance, pixel-perfect frontend web solutions and interactive digital products under Betopia Group. Engineering modern React, Next.js, and TypeScript architectures with responsive UI systems, headless CMS integrations, and smooth GSAP/Framer animations.",
+      "Building client-facing web applications, responsive digital products, and interactive storefronts across global industries. Engineering high-performance React, Next.js, and TypeScript architectures with custom Liquid theme development and headless integrations.",
     highlights: [
-      "Building client-facing applications and interactive digital products for global clients",
-      "Engineering responsive, scalable web interfaces using React, Next.js, TypeScript & Tailwind CSS",
-      "Integrating headless solutions (Wix Headless, Shopify Headless, REST/GraphQL APIs)",
-      "Collaborating closely with cross-functional design, product, and QA teams under Betopia Group",
+      "Building client-facing web apps and interactive digital products for global clients across industries",
+      "Engineering responsive, scalable web interfaces with React, Next.js, TypeScript & Tailwind CSS",
+      "Integrating and customizing Shopify storefronts — headless (Storefront API) architecture, custom Liquid theme development, REST APIs & GraphQL",
+      "Collaborating with cross-functional design, product, and QA teams across the Betopia Group",
     ],
     icon: FiBriefcase,
-    techStack: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "GSAP", "Wix Headless", "Shopify Headless"],
+    techStack: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Shopify Headless", "Liquid", "Storefront API", "GraphQL"],
   },
   {
-    period: "2023 — Present",
-    category: "DevOps & Cloud",
+    period: "2024 — Present",
+    category: "Networking & DevOps",
     badgeColor: "neo-badge-cyan",
-    role: "DevOps & Self-Hosted Infrastructure",
-    company: "Custom HomeLab Server",
-    subtitle: "Physical Server Lab • Docker • Cloudflare • CI/CD",
+    role: "Networking & Systems Infrastructure",
+    company: "Hands-on & Cloud Deployments",
+    subtitle: "OpenWrt • Linux SysAdmin • Docker • Cloudflare",
     description:
-      "Engineered, wired, and maintaining a custom self-built physical homelab server running Linux & virtualization. Orchestrating multi-service Docker workloads, automated GitHub Actions CI/CD solutions, Nginx reverse proxies with SSL, zero-trust Cloudflare Tunnels, and private ZeroTier mesh networking.",
+      "Hands-on expertise in Linux systems administration, enterprise-grade OpenWrt network routing, serverless DNS, and Docker-based container infrastructure with load balancing.",
     highlights: [
-      "Built and provisioned custom physical hardware server for self-hosting & cloud workloads",
-      "Engineered automated GitHub Actions CI/CD deployment solutions for zero-downtime shipping",
-      "Containerized multi-service microservices with Docker, Docker Compose, and PM2 process resilience",
-      "Secured internal server access via Cloudflare Zero-Trust Tunnels & ZeroTier mesh VPN",
-      "Configured high-performance Nginx reverse proxies with automated SSL certificate renewal",
+      "Configured OpenWrt firewalls, DHCP, VLAN and subnet management, and per-user port access control",
+      "Administered Linux OS, SSH access hardening, VPS hosting, domain & DNS management",
+      "Configured NGINX setup & load balancing, Cloudflare Workers & Tunnels, and ZeroTier mesh networks",
+      "Deployed Serverless DNS systems (DNS-over-HTTPS RFC 8484, DNSSEC) and Docker multi-layer builds",
     ],
     icon: FiServer,
-    techStack: ["Custom HomeLab", "Docker", "GitHub Actions CI/CD", "Linux VPS", "Nginx", "PM2", "Cloudflare Tunnels", "ZeroTier"],
+    techStack: ["Linux OS", "OpenWrt", "NGINX", "Cloudflare Workers", "Docker", "Serverless DNS", "ZeroTier", "SSH"],
   },
   {
-    period: "2022 — Present",
-    category: "Full Stack & Mobile",
+    period: "2024 — Present",
+    category: "Full Stack & Edge",
     badgeColor: "neo-badge-accent",
-    role: "Full Stack & Mobile Developer",
+    role: "Full Stack & Modern Web Engineering",
     company: "Independent & Open Source",
-    subtitle: "MERN Stack • React Native • Expo SDK • n8n Automation",
+    subtitle: "Node.js • Express 5 • MongoDB • GraphQL • Edge AI",
     description:
-      "Designing and implementing scalable full-stack web and mobile applications. Building performant frontends in React/Next.js paired with robust Node.js/Express and MongoDB backends, as well as native mobile apps with Expo SDK and workflow automation with n8n.",
+      "Architecting full-stack serverless and edge applications with resilient backend architectures, hardened cryptographic security, and dynamic database integrations.",
     highlights: [
-      "Developed full-stack web apps with modern React, Next.js, Node.js, and MongoDB",
-      "Built cross-platform iOS & Android mobile applications using React Native & Expo SDK",
-      "Engineered secure JWT authentication, role-based access control, and payment flows",
-      "Integrated workflow automation and self-hosted pipelines utilizing n8n and webhooks",
+      "Engineered custom testimonial & submission engines syncing directly to Shopify Metaobjects",
+      "Built media upload pipelines for images, videos & 3D models via Shopify Staged Uploads API",
+      "Architected RFC 8484 compliant DoH resolvers with AI bandit routing (UCB, Kalman filters) and 40+ threat subsystems",
+      "Implemented AES-256-GCM token encryption, Cloudflare Turnstile, and dual serverless runtimes",
     ],
     icon: FiCode,
-    techStack: ["React.js", "React Native", "Expo SDK", "Node.js", "Express.js", "MongoDB", "n8n", "JWT"],
+    techStack: ["Node.js", "Express 5", "MongoDB", "Cloudflare D1 & KV", "JWT Auth", "GraphQL", "Edge AI", "Turnstile"],
   },
   {
-    period: "2022 — 2026 (Expected)",
+    period: "Graduated",
     category: "Education & Foundations",
     badgeColor: "neo-badge-amber",
-    role: "BSc in Computer Science & Engineering",
-    company: "Daffodil International University",
-    subtitle: "4th Year Undergraduate • Dhaka, Bangladesh",
+    role: "BSc in Apparel Manufacturing & Technology",
+    company: "National Institute of Fashion Technology",
+    subtitle: "74 C/A Wireless Gate, Dhaka 1212",
     description:
-      "Final year computer science undergraduate with strong grounding in algorithms, data structures, computer networks, database systems, and software engineering methodologies. Maintained high academic standing with prior HSC GPA of 4.95 / 5.00.",
+      "Graduated with a Bachelor of Science in Apparel Manufacturing & Technology, combining analytical systems engineering and industrial workflow optimization with self-taught computer networking and modern software engineering.",
     highlights: [
-      "Advanced coursework: Data Structures, Algorithms, DBMS, Operating Systems, Computer Networks",
-      "Active problem solver in C, C++, Python, and Java",
-      "Collaborative project leadership and agile software engineering coursework",
+      "Synthesized industrial manufacturing methodologies with modern software engineering and automation",
+      "Self-taught systems fundamentals paired with real-world deployment experience across cloud environments",
+      "Active builder in web technologies, network infrastructure, and distributed edge systems",
     ],
     icon: FiAward,
-    techStack: ["Algorithms", "Data Structures", "C++", "Python", "Java", "DBMS", "Computer Networks"],
+    techStack: ["Systems Thinking", "Analytical Engineering", "Process Optimization", "Problem Solving"],
   },
 ];
 
@@ -98,7 +97,7 @@ export default function Experience() {
         y: 50,
         stagger: 0.15,
         duration: 0.7,
-        ease: "power3.out",
+        ease: "power2.out",
         scrollTrigger: {
           trigger: ".exp-timeline",
           start: "top 80%",
@@ -127,7 +126,7 @@ export default function Experience() {
             Experience & Journey
           </h2>
           <p className="text-xs sm:text-base lg:text-lg 2xl:text-xl text-[var(--neo-text-muted)]">
-            Professional industry experience, custom self-built homelab infrastructure, full-stack creations, and academic foundation.
+            Professional frontend engineering at Pixelora Studio, hands-on Linux & OpenWrt network infrastructure, and full-stack creations.
           </p>
         </div>
 

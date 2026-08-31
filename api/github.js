@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     // If the token isn't set, we can still fall back to the public API
     const token = process.env.GITHUB_PAT;
     
-    let url = "https://api.github.com/users/TheLunatic1/repos?sort=updated&per_page=100";
+    let url = "https://api.github.com/users/abir614/repos?sort=updated&per_page=100";
     const headers = {
       "Accept": "application/vnd.github.v3+json",
       "User-Agent": "Portfolio-App"
