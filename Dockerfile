@@ -1,8 +1,8 @@
-# Stage 1: Install production dependencies
+# Stage 1: Install build dependencies
 FROM node:24-alpine AS deps
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
+RUN npm ci --ignore-scripts && npm cache clean --force
 
 # Stage 2: Optimize and bundle using minimum toolchain
 FROM 0abir/minimum:node AS builder
