@@ -31,7 +31,7 @@ export default function Oneko() {
     let lastPawY = 64;
     let isLeftPaw = false;
 
-    function createFootprint(x, y, angleDeg) {
+    function createFootprint(x, y, angleDeg, scale = 1) {
       if (!footprintContainer || !footprintContainer.isConnected) return;
 
       const paw = document.createElement("div");
@@ -44,8 +44,8 @@ export default function Oneko() {
       paw.style.pointerEvents = "none";
       paw.style.userSelect = "none";
       paw.style.transformOrigin = "center center";
-      paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(0.6)`;
-      paw.style.opacity = "0.75";
+      paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(${0.5 * scale})`;
+      paw.style.opacity = "0.8";
       paw.style.transition = "transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1.2s ease-out";
       paw.style.color = "var(--neo-accent, #6366f1)";
       paw.style.filter = "drop-shadow(0 1px 2px rgba(0,0,0,0.18))";
@@ -65,14 +65,14 @@ export default function Oneko() {
 
       // Pop in to full scale
       requestAnimationFrame(() => {
-        paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(1)`;
+        paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(${scale})`;
       });
 
       // Start fading out after delay
       const fadeTimeout = setTimeout(() => {
         paw.style.opacity = "0";
-        paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(0.65)`;
-      }, 1200);
+        paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(${0.65 * scale})`;
+      }, 1300);
 
       // Remove from DOM once fully faded
       const removeTimeout = setTimeout(() => {
@@ -81,7 +81,7 @@ export default function Oneko() {
         }
         pawTimeouts.delete(fadeTimeout);
         pawTimeouts.delete(removeTimeout);
-      }, 2400);
+      }, 2500);
 
       pawTimeouts.add(fadeTimeout);
       pawTimeouts.add(removeTimeout);
@@ -98,6 +98,20 @@ export default function Oneko() {
     let idleTime = 0;
     let idleAnimation = null;
     let idleAnimationFrame = 0;
+
+    // Cat Hunting State Machine
+    let huntingState = "none"; // "none" | "prep" | "leap" | "landing"
+    let huntStartTime = 0;
+    let huntStartX = 0;
+    let huntStartY = 0;
+    let huntTargetX = 0;
+    let huntTargetY = 0;
+    let lastPounceTime = 0;
+
+    const POUNCE_COOLDOWN = 3800; // 3.8s cooldown between hunting pounces
+    const PREP_DURATION = 580;    // 580ms crouch & butt-wiggle lock-on
+    const LEAP_DURATION = 360;    // 360ms fast explosive leap
+    const LANDING_DURATION = 400; // 400ms triumph swipe & squash
 
     const nekoSpeed = 10;
     const spriteSets = {
@@ -176,8 +190,9 @@ export default function Oneko() {
     nekoEl.style.zIndex = "9999999";
     nekoEl.style.backgroundImage = "url('/oneko.gif')";
     nekoEl.style.backgroundRepeat = "no-repeat";
-    nekoEl.style.transition = "transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
-    nekoEl.title = "Click me! 🐾";
+    nekoEl.style.transformOrigin = "bottom center";
+    nekoEl.style.transition = "none";
+    nekoEl.title = "Hunting mode active! 🐾";
 
     document.body.appendChild(nekoEl);
 
@@ -197,6 +212,7 @@ export default function Oneko() {
 
     function triggerCatInteraction() {
       playMeowSound();
+      huntingState = "none";
 
       // Bounce & Alert animation on the cat
       nekoEl.style.transform = "scale(1.45) translateY(-10px)";
@@ -219,7 +235,7 @@ export default function Oneko() {
     nekoEl.addEventListener("pointerdown", onNekoClick);
     nekoEl.addEventListener("click", onNekoClick);
 
-    // Global click listener to catch clicks right near the cat (generous 44px proximity hitbox)
+    // Global click listener to catch clicks right near the cat
     const onGlobalPointerDown = (e) => {
       const dist = Math.hypot(e.clientX - nekoPosX, e.clientY - nekoPosY);
       if (dist < 44) {
@@ -257,8 +273,18 @@ export default function Oneko() {
       idleAnimationFrame = 0;
     }
 
+    function getDirectionName(diffX, diffY, distance) {
+      let direction = "";
+      direction += diffY / distance > 0.5 ? "N" : "";
+      direction += diffY / distance < -0.5 ? "S" : "";
+      direction += diffX / distance > 0.5 ? "W" : "";
+      direction += diffX / distance < -0.5 ? "E" : "";
+      return direction || "idle";
+    }
+
     function idle() {
       idleTime += 1;
+      nekoEl.style.transform = "scale(1)";
 
       // Random idle actions
       if (idleTime > 10 && Math.floor(Math.random() * 200) === 0 && idleAnimation == null) {
@@ -299,10 +325,144 @@ export default function Oneko() {
     }
 
     function frame() {
+      const now = Date.now();
+
+      // ==========================================
+      // 1. HUNTING STATE: PRE-POUNCE CROUCH & BUTT-WIGGLE
+      // ==========================================
+      if (huntingState === "prep") {
+        const elapsed = now - huntStartTime;
+        const diffX = nekoPosX - mousePosX;
+        const diffY = nekoPosY - mousePosY;
+        const dist = Math.hypot(diffX, diffY) || 1;
+
+        // Keep eyes locked on the moving cursor
+        const dirName = getDirectionName(diffX, diffY, dist);
+        setSprite(dirName !== "idle" ? dirName : "alert", 0);
+
+        // Feline stalk crouch + signature rapid butt wiggle (oscillating rotation & low stance)
+        const crouchFactor = Math.min(1, elapsed / 200);
+        const wiggleAngle = Math.sin((elapsed / 45) * Math.PI) * (5 + crouchFactor * 3);
+        const scaleX = 1 + 0.22 * crouchFactor;
+        const scaleY = 1 - 0.28 * crouchFactor;
+        const translateY = 3 * crouchFactor;
+
+        nekoEl.style.transform = `scale(${scaleX}, ${scaleY}) translateY(${translateY}px) rotate(${wiggleAngle.toFixed(1)}deg)`;
+
+        // Transition from prep to explosive jump
+        if (elapsed >= PREP_DURATION) {
+          huntingState = "leap";
+          huntStartTime = now;
+          huntStartX = nekoPosX;
+          huntStartY = nekoPosY;
+          huntTargetX = mousePosX;
+          huntTargetY = mousePosY;
+
+          // Spawn launch paw marks at take-off
+          const launchAngle = Math.atan2(huntTargetY - huntStartY, huntTargetX - huntStartX) * (180 / Math.PI) + 90;
+          createFootprint(nekoPosX - 4, nekoPosY + 4, launchAngle, 1.1);
+          createFootprint(nekoPosX + 4, nekoPosY + 4, launchAngle, 1.1);
+        }
+        return;
+      }
+
+      // ==========================================
+      // 2. HUNTING STATE: EXPLOSIVE AIRBORNE LEAP
+      // ==========================================
+      if (huntingState === "leap") {
+        const elapsed = now - huntStartTime;
+        const progress = Math.min(1, elapsed / LEAP_DURATION);
+
+        // Ease-out trajectory towards prey (cursor)
+        const easeOut = 1 - Math.pow(1 - progress, 2.2);
+
+        nekoPosX = huntStartX + (huntTargetX - huntStartX) * easeOut;
+        nekoPosY = huntStartY + (huntTargetY - huntStartY) * easeOut;
+
+        // Parabolic jump arc (up to 38px in the air at apex)
+        const jumpApex = -Math.sin(progress * Math.PI) * 38;
+
+        const diffX = nekoPosX - huntTargetX;
+        const diffY = nekoPosY - huntTargetY;
+        const dist = Math.hypot(diffX, diffY) || 1;
+        setSprite(getDirectionName(diffX, diffY, dist), Math.floor(progress * 4));
+
+        // Stretch body mid-air during the spring
+        const midAirStretch = 1 + Math.sin(progress * Math.PI) * 0.35;
+        const leapRotate = (huntTargetX - huntStartX > 0 ? 6 : -6) * Math.sin(progress * Math.PI);
+
+        nekoEl.style.left = `${nekoPosX - 16}px`;
+        nekoEl.style.top = `${nekoPosY - 16 + jumpApex}px`;
+        nekoEl.style.transform = `scale(${midAirStretch}, ${midAirStretch * 0.95}) rotate(${leapRotate}deg)`;
+
+        // Landing impact on target
+        if (progress >= 1) {
+          huntingState = "landing";
+          huntStartTime = now;
+          nekoPosX = huntTargetX;
+          nekoPosY = huntTargetY;
+          nekoEl.style.left = `${nekoPosX - 16}px`;
+          nekoEl.style.top = `${nekoPosY - 16}px`;
+
+          // Landing squash & paw prints
+          nekoEl.style.transform = "scale(1.45, 0.6) translateY(5px)";
+          const strikeAngle = Math.atan2(huntTargetY - huntStartY, huntTargetX - huntStartX) * (180 / Math.PI) + 90;
+          createFootprint(nekoPosX - 6, nekoPosY + 4, strikeAngle, 1.25);
+          createFootprint(nekoPosX + 6, nekoPosY + 4, strikeAngle, 1.25);
+
+          playMeowSound();
+          setSprite("scratchSelf", 0);
+        }
+        return;
+      }
+
+      // ==========================================
+      // 3. HUNTING STATE: TRIUMPH CATCH & RECOVERY
+      // ==========================================
+      if (huntingState === "landing") {
+        const elapsed = now - huntStartTime;
+        setSprite("scratchSelf", Math.floor(elapsed / 90));
+
+        // Spring back up from impact squash to normal stance
+        const recoveryProgress = Math.min(1, elapsed / 220);
+        const scaleX = 1.45 - 0.45 * recoveryProgress;
+        const scaleY = 0.6 + 0.4 * recoveryProgress;
+        nekoEl.style.transform = `scale(${scaleX}, ${scaleY})`;
+
+        if (elapsed >= LANDING_DURATION) {
+          huntingState = "none";
+          lastPounceTime = now;
+          nekoEl.style.transform = "scale(1)";
+          resetIdleAnimation();
+        }
+        return;
+      }
+
+      // ==========================================
+      // 4. NORMAL CHASING & IDLE ENGINE
+      // ==========================================
       frameCount += 1;
       const diffX = nekoPosX - mousePosX;
       const diffY = nekoPosY - mousePosY;
       const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
+
+      // Check if distance qualifies for hunting pounce (close proximity: 55px - 115px)
+      const canHunt =
+        distance >= 52 &&
+        distance <= 115 &&
+        now - lastPounceTime > POUNCE_COOLDOWN &&
+        idleTime <= 2;
+
+      if (canHunt) {
+        huntingState = "prep";
+        huntStartTime = now;
+        huntStartX = nekoPosX;
+        huntStartY = nekoPosY;
+        huntTargetX = mousePosX;
+        huntTargetY = mousePosY;
+        idleTime = 0;
+        return;
+      }
 
       if (distance < nekoSpeed || distance < 48) {
         idle();
@@ -314,20 +474,15 @@ export default function Oneko() {
 
       if (idleTime > 1) {
         setSprite("alert", 0);
-        // count down after being alerted before moving
         idleTime = Math.min(idleTime, 7);
         idleTime -= 1;
         return;
       }
 
-      let direction = "";
-      direction += diffY / distance > 0.5 ? "N" : "";
-      direction += diffY / distance < -0.5 ? "S" : "";
-      direction += diffX / distance > 0.5 ? "W" : "";
-      direction += diffX / distance < -0.5 ? "E" : "";
-      setSprite(direction || "idle", frameCount);
+      const direction = getDirectionName(diffX, diffY, distance);
+      setSprite(direction, frameCount);
 
-      // Movement vector
+      // Normal movement vector
       const dirX = -(diffX / distance);
       const dirY = -(diffY / distance);
 
@@ -339,6 +494,7 @@ export default function Oneko() {
 
       nekoEl.style.left = `${nekoPosX - 16}px`;
       nekoEl.style.top = `${nekoPosY - 16}px`;
+      nekoEl.style.transform = "scale(1)";
 
       // Check distance traveled since last paw print
       const distSincePaw = Math.hypot(nekoPosX - lastPawX, nekoPosY - lastPawY);
@@ -363,7 +519,11 @@ export default function Oneko() {
     function onAnimationFrame(timestamp) {
       if (!nekoEl.isConnected) return;
       if (!lastFrameTimestamp) lastFrameTimestamp = timestamp;
-      if (timestamp - lastFrameTimestamp > 100) {
+
+      // When in hunting leap/prep, update at higher refresh rate (40ms) for ultra-fluid jump physics
+      const interval = huntingState === "leap" || huntingState === "prep" ? 30 : 90;
+
+      if (timestamp - lastFrameTimestamp > interval) {
         lastFrameTimestamp = timestamp;
         frame();
       }
