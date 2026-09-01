@@ -15,7 +15,7 @@ export default function Oneko() {
       existingFootprints.parentNode.removeChild(existingFootprints);
     }
 
-    // Footprints container
+    // Footprints and emote particles container
     const footprintContainer = document.createElement("div");
     footprintContainer.id = "neko-footprints";
     footprintContainer.setAttribute("aria-hidden", "true");
@@ -31,6 +31,7 @@ export default function Oneko() {
     let lastPawY = 64;
     let isLeftPaw = false;
 
+    // Spawns disappearing paw print
     function createFootprint(x, y, angleDeg, scale = 1) {
       if (!footprintContainer || !footprintContainer.isConnected) return;
 
@@ -45,10 +46,10 @@ export default function Oneko() {
       paw.style.userSelect = "none";
       paw.style.transformOrigin = "center center";
       paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(${0.5 * scale})`;
-      paw.style.opacity = "0.75";
+      paw.style.opacity = "0.85";
       paw.style.transition = "transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1.2s ease-out";
-      paw.style.color = "var(--neo-accent, #6366f1)";
-      paw.style.filter = "drop-shadow(0 1px 2px rgba(0,0,0,0.15))";
+      paw.style.color = "#ffffff";
+      paw.style.filter = "drop-shadow(0 1px 2px rgba(0,0,0,0.35))";
 
       // Cute stylized cat paw SVG (main pad + 4 toe beans)
       paw.innerHTML = `
@@ -87,6 +88,68 @@ export default function Oneko() {
       pawTimeouts.add(removeTimeout);
     }
 
+    // Spawns cute floating emote bubbles (e.g. '!', '♥', 'z', '?')
+    function spawnEmote(x, y, text, type = "default") {
+      if (!footprintContainer || !footprintContainer.isConnected) return;
+
+      const emote = document.createElement("div");
+      emote.style.position = "absolute";
+      emote.style.left = `${x}px`;
+      emote.style.top = `${y - 14}px`;
+      emote.style.pointerEvents = "none";
+      emote.style.userSelect = "none";
+      emote.style.fontFamily = "'Space Grotesk', system-ui, sans-serif";
+      emote.style.fontWeight = "900";
+      emote.style.fontSize = type === "sleep" ? "12px" : "14px";
+      emote.style.lineHeight = "1";
+      emote.style.padding = "2px 6px";
+      emote.style.borderRadius = "999px";
+      emote.style.transform = "translate(-50%, 0) scale(0.6)";
+      emote.style.opacity = "0";
+      emote.style.transition = "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-out";
+      emote.innerText = text;
+
+      if (type === "alert") {
+        emote.style.backgroundColor = "var(--neo-amber, #fbbf24)";
+        emote.style.color = "#121212";
+        emote.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
+      } else if (type === "love") {
+        emote.style.backgroundColor = "var(--neo-rose, #fb7185)";
+        emote.style.color = "#ffffff";
+      } else if (type === "sleep") {
+        emote.style.color = "var(--neo-accent, #818cf8)";
+        emote.style.opacity = "0.85";
+        emote.style.fontStyle = "italic";
+      } else {
+        emote.style.backgroundColor = "var(--neo-surface, #1e293b)";
+        emote.style.color = "var(--neo-text, #f8fafc)";
+        emote.style.border = "1px solid var(--neo-border, rgba(255,255,255,0.4))";
+      }
+
+      footprintContainer.appendChild(emote);
+
+      requestAnimationFrame(() => {
+        emote.style.opacity = "1";
+        emote.style.transform = "translate(-50%, -20px) scale(1)";
+      });
+
+      const fadeTimeout = setTimeout(() => {
+        emote.style.opacity = "0";
+        emote.style.transform = "translate(-50%, -36px) scale(0.8)";
+      }, 800);
+
+      const removeTimeout = setTimeout(() => {
+        if (emote.parentNode) {
+          emote.parentNode.removeChild(emote);
+        }
+        pawTimeouts.delete(fadeTimeout);
+        pawTimeouts.delete(removeTimeout);
+      }, 1500);
+
+      pawTimeouts.add(fadeTimeout);
+      pawTimeouts.add(removeTimeout);
+    }
+
     const nekoEl = document.createElement("div");
     let nekoPosX = 64;
     let nekoPosY = 64;
@@ -99,19 +162,26 @@ export default function Oneko() {
     let idleAnimation = null;
     let idleAnimationFrame = 0;
 
-    // Feline Hunting State Machine
-    let huntingState = "none"; // "none" | "prep" | "leap" | "landing"
-    let huntStartTime = 0;
-    let huntStartX = 0;
-    let huntStartY = 0;
-    let huntTargetX = 0;
-    let huntTargetY = 0;
-    let lastPounceTime = 0;
+    // Feline Behaviors State Machine
+    let catState = "none"; 
+    // "none" | "hunting_prep" | "hunting_leap" | "hunting_landing" | "scared_jump" | "scared_shuffle" | "scared_flee" | "hiding" | "tail_chase" | "rolling" | "batting"
 
-    const POUNCE_COOLDOWN = 3500; // 3.5s cooldown between hunting pounces
-    const PREP_DURATION = 380;    // 380ms smooth stealth crouch & tension
-    const LEAP_DURATION = 320;    // 320ms snappy airborne leap
-    const LANDING_DURATION = 350; // 350ms landing catch & recovery
+    let actionStartTime = 0;
+    let actionStartX = 0;
+    let actionStartY = 0;
+    let actionTargetX = 0;
+    let actionTargetY = 0;
+    let lastPounceTime = 0;
+    let lastScaredTime = 0;
+    let lastZzzTime = 0;
+
+    // Mouse velocity tracker to detect sudden fast cursor movements (spooking the cat)
+    let lastMouseTrackX = mousePosX;
+    let lastMouseTrackY = mousePosY;
+    let lastMouseTrackTime = Date.now();
+
+    const POUNCE_COOLDOWN = 3500;
+    const SCARED_COOLDOWN = 8000;
 
     const nekoSpeed = 10;
     const spriteSets = {
@@ -191,15 +261,48 @@ export default function Oneko() {
     nekoEl.style.backgroundImage = "url('/oneko.gif')";
     nekoEl.style.backgroundRepeat = "no-repeat";
     nekoEl.style.transformOrigin = "bottom center";
-    nekoEl.title = "Click me! 🐾";
+    nekoEl.title = "Click or play with me! 🐾";
+
+    // Spiked Fur & Flared Bottlebrush Tail Overlay (Halloween Cat Piloerection Mode)
+    const spikedFurEl = document.createElement("div");
+    spikedFurEl.className = "neko-spiked-fur-overlay";
+    spikedFurEl.style.position = "absolute";
+    spikedFurEl.style.left = "-6px";
+    spikedFurEl.style.top = "-8px";
+    spikedFurEl.style.width = "44px";
+    spikedFurEl.style.height = "44px";
+    spikedFurEl.style.pointerEvents = "none";
+    spikedFurEl.style.display = "none";
+    spikedFurEl.style.transition = "opacity 0.2s ease, transform 0.2s ease";
+    spikedFurEl.innerHTML = `
+      <svg viewBox="0 0 44 44" width="44" height="44" style="display:block; width:100%; height:100%;">
+        <!-- Jagged Bristled Spine Spikes -->
+        <path d="M9,22 L11,13 L14,17 L17,9 L20,15 L23,7 L26,14 L29,8 L32,16 L34,22" fill="none" stroke="var(--neo-text, #121212)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" />
+        <path d="M10,21 L12,14 L14,18 L17,11 L20,16 L23,9 L26,15 L29,10 L31,17 L33,21" fill="none" stroke="var(--neo-rose, #f43f5e)" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" />
+        <!-- Puffed Bottlebrush Spiky Tail -->
+        <path d="M7,32 L2,29 L6,25 L1,22 L6,19 L2,15 L8,16" fill="none" stroke="var(--neo-text, #121212)" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" />
+        <path d="M7,31 L3,29 L6,26 L2,23 L6,20 L3,16 L7,17" fill="none" stroke="var(--neo-rose, #f43f5e)" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round" />
+      </svg>
+    `;
+    nekoEl.appendChild(spikedFurEl);
 
     document.body.appendChild(nekoEl);
 
-    // Audio instance for authentic, cute cat meow
-    function playMeowSound() {
+    function setSpikedFur(active) {
+      if (active) {
+        spikedFurEl.style.display = "block";
+        spikedFurEl.style.opacity = "1";
+      } else {
+        spikedFurEl.style.opacity = "0";
+        spikedFurEl.style.display = "none";
+      }
+    }
+
+    // Audio instance for authentic cat meow
+    function playMeowSound(vol = 0.85) {
       try {
         const sound = new Audio("/meow.wav");
-        sound.volume = 0.85;
+        sound.volume = vol;
         const promise = sound.play();
         if (promise !== undefined) {
           promise.catch(() => {});
@@ -210,8 +313,10 @@ export default function Oneko() {
     }
 
     function triggerCatInteraction() {
-      playMeowSound();
-      huntingState = "none";
+      playMeowSound(0.9);
+      catState = "none";
+      setSpikedFur(false);
+      spawnEmote(nekoPosX, nekoPosY - 10, "♥", "love");
 
       // Bounce & Alert animation on the cat
       nekoEl.style.transform = "scale(1.45) translateY(-10px)";
@@ -225,7 +330,7 @@ export default function Oneko() {
       }, 250);
     }
 
-    // Direct click/pointerdown on Neko element
+    // Direct click on Neko element
     const onNekoClick = (e) => {
       e.stopPropagation();
       triggerCatInteraction();
@@ -234,11 +339,18 @@ export default function Oneko() {
     nekoEl.addEventListener("pointerdown", onNekoClick);
     nekoEl.addEventListener("click", onNekoClick);
 
-    // Global click listener to catch clicks right near the cat
+    // Global click listener to catch nearby clicks (cat playfully bats at nearby click!)
     const onGlobalPointerDown = (e) => {
       const dist = Math.hypot(e.clientX - nekoPosX, e.clientY - nekoPosY);
       if (dist < 44) {
         triggerCatInteraction();
+      } else if (dist < 130 && catState === "none" && idleTime > 0) {
+        // Playful paw bat at nearby click
+        catState = "batting";
+        actionStartTime = Date.now();
+        actionTargetX = e.clientX;
+        actionTargetY = e.clientY;
+        spawnEmote(actionTargetX, actionTargetY, "🐾", "play");
       }
     };
 
@@ -247,6 +359,29 @@ export default function Oneko() {
     const onMouseMove = (event) => {
       mousePosX = event.clientX;
       mousePosY = event.clientY;
+
+      const now = Date.now();
+      const dt = now - lastMouseTrackTime;
+      if (dt > 25) {
+        const dX = mousePosX - lastMouseTrackX;
+        const dY = mousePosY - lastMouseTrackY;
+        const speed = Math.hypot(dX, dY);
+        const distToCat = Math.hypot(mousePosX - nekoPosX, mousePosY - nekoPosY);
+
+        // SUDDEN FAST FLICK NEAR CAT -> GET SCARED & BRISTLE UP!
+        if (
+          speed > 68 &&
+          distToCat < 75 &&
+          catState === "none" &&
+          now - lastScaredTime > SCARED_COOLDOWN
+        ) {
+          triggerStartledBehavior();
+        }
+
+        lastMouseTrackX = mousePosX;
+        lastMouseTrackY = mousePosY;
+        lastMouseTrackTime = now;
+      }
     };
 
     const onTouchMove = (event) => {
@@ -281,18 +416,82 @@ export default function Oneko() {
       return direction || "idle";
     }
 
+    // Trigger Startled, Spiked Fur & Crab-Walk Behavior
+    function triggerStartledBehavior() {
+      const now = Date.now();
+      lastScaredTime = now;
+      catState = "scared_jump";
+      actionStartTime = now;
+      actionStartX = nekoPosX;
+      actionStartY = nekoPosY;
+
+      // Enable the spiked bristled fur
+      setSpikedFur(true);
+
+      // Find nearest screen edge to flee and hide behind
+      const distLeft = nekoPosX;
+      const distRight = window.innerWidth - nekoPosX;
+      const distTop = nekoPosY;
+      const distBottom = window.innerHeight - nekoPosY;
+
+      const minDist = Math.min(distLeft, distRight, distTop, distBottom);
+      if (minDist === distLeft) {
+        actionTargetX = 14;
+        actionTargetY = nekoPosY;
+      } else if (minDist === distRight) {
+        actionTargetX = window.innerWidth - 14;
+        actionTargetY = nekoPosY;
+      } else if (minDist === distTop) {
+        actionTargetX = nekoPosX;
+        actionTargetY = 14;
+      } else {
+        actionTargetX = nekoPosX;
+        actionTargetY = window.innerHeight - 14;
+      }
+
+      spawnEmote(nekoPosX, nekoPosY - 14, "!", "alert");
+    }
+
     function idle() {
       idleTime += 1;
-      nekoEl.style.transform = "scale(1)";
+      const now = Date.now();
 
-      // Random idle actions
-      if (idleTime > 10 && Math.floor(Math.random() * 200) === 0 && idleAnimation == null) {
-        const availableIdleAnimations = ["sleeping", "scratchSelf"];
-        if (nekoPosX < 32) availableIdleAnimations.push("scratchWallW");
-        if (nekoPosY < 32) availableIdleAnimations.push("scratchWallN");
-        if (nekoPosX > window.innerWidth - 32) availableIdleAnimations.push("scratchWallE");
-        if (nekoPosY > window.innerHeight - 32) availableIdleAnimations.push("scratchWallS");
-        idleAnimation = availableIdleAnimations[Math.floor(Math.random() * availableIdleAnimations.length)];
+      // Emit gentle sleeping Zzz particles when taking a cat nap
+      if (idleAnimation === "sleeping" && now - lastZzzTime > 1600) {
+        lastZzzTime = now;
+        spawnEmote(nekoPosX + 6, nekoPosY - 6, "z", "sleep");
+      }
+
+      // Natural Idle Personality Triggers
+      if (idleTime > 8 && catState === "none") {
+        const rand = Math.floor(Math.random() * 250);
+
+        // 1. Tail Chasing Spin (1 in 250 idle frames) - Slow & Goofy
+        if (rand === 1) {
+          catState = "tail_chase";
+          actionStartTime = now;
+          actionStartX = nekoPosX;
+          actionStartY = nekoPosY;
+          return;
+        }
+
+        // 2. Playful Floor Roll & Belly Wiggle (1 in 250 idle frames)
+        if (rand === 2) {
+          catState = "rolling";
+          actionStartTime = now;
+          spawnEmote(nekoPosX, nekoPosY - 10, "♥", "love");
+          return;
+        }
+
+        // 3. Spontaneous Wall Scratching / Loafing / Sleeping
+        if (rand === 3 && idleAnimation == null) {
+          const availableIdleAnimations = ["sleeping", "scratchSelf"];
+          if (nekoPosX < 36) availableIdleAnimations.push("scratchWallW");
+          if (nekoPosY < 36) availableIdleAnimations.push("scratchWallN");
+          if (nekoPosX > window.innerWidth - 36) availableIdleAnimations.push("scratchWallE");
+          if (nekoPosY > window.innerHeight - 36) availableIdleAnimations.push("scratchWallS");
+          idleAnimation = availableIdleAnimations[Math.floor(Math.random() * availableIdleAnimations.length)];
+        }
       }
 
       switch (idleAnimation) {
@@ -323,101 +522,271 @@ export default function Oneko() {
       idleAnimationFrame += 1;
     }
 
-    // Continuous 60fps animation update loop
+    // Continuous 60fps physics & behaviors engine
     function updatePhysics() {
       const now = Date.now();
 
       // ========================================================
-      // 1. HUNTING STATE: SMOOTH NATURAL STEALTH STALK & COIL
+      // 1. BEHAVIOR: TAIL CHASING (SLOWED DOWN, NATURAL CIRCLE)
       // ========================================================
-      if (huntingState === "prep") {
-        const elapsed = now - huntStartTime;
-        const progress = Math.min(1, elapsed / PREP_DURATION);
+      if (catState === "tail_chase") {
+        const elapsed = now - actionStartTime;
+        const duration = 3000; // Slowed down from 1.3s to 3.0s for clear, natural movement
+        const progress = Math.min(1, elapsed / duration);
 
-        // Smoothly creep forward into the stalk stance rather than freezing abruptly
+        // 2 full steady rotations over 3.0 seconds
+        const angleRad = progress * Math.PI * 4;
+        const radius = 13; // Wider, clearer pivot radius
+        nekoPosX = actionStartX + Math.cos(angleRad) * radius;
+        nekoPosY = actionStartY + Math.sin(angleRad) * radius;
+
+        // Smooth 130ms sprite cycling around 8 directions
+        const directions = ["E", "SE", "S", "SW", "W", "NW", "N", "NE"];
+        const dirIndex = Math.floor((angleRad / (Math.PI * 2)) * 8) % 8;
+        setSprite(directions[dirIndex], Math.floor(elapsed / 130));
+
+        nekoEl.style.left = `${nekoPosX - 16}px`;
+        nekoEl.style.top = `${nekoPosY - 16}px`;
+        nekoEl.style.transform = `scale(1.02)`;
+
+        // Ring of tiny paw footprints evenly spaced
+        if (Math.floor(elapsed / 220) !== Math.floor((elapsed - 16) / 220)) {
+          createFootprint(nekoPosX, nekoPosY + 4, (angleRad * 180) / Math.PI + 90, 0.75);
+        }
+
+        if (progress >= 1) {
+          catState = "none";
+          setSprite("alert", 0);
+          spawnEmote(nekoPosX, nekoPosY - 10, "?", "default");
+          nekoEl.style.transform = "scale(1)";
+          resetIdleAnimation();
+        }
+        return;
+      }
+
+      // ========================================================
+      // 2. BEHAVIOR: PLAYFUL FLOOR ROLL & BELLY WIGGLE
+      // ========================================================
+      if (catState === "rolling") {
+        const elapsed = now - actionStartTime;
+        const duration = 1200;
+        const progress = Math.min(1, elapsed / duration);
+
+        const rollWiggle = Math.sin(progress * Math.PI * 4) * 25;
+        const squash = 1 + Math.sin(progress * Math.PI) * 0.15;
+
+        setSprite("scratchSelf", Math.floor(elapsed / 110));
+        nekoEl.style.transform = `scale(${squash}, ${2 - squash}) translateY(3px) rotate(${rollWiggle.toFixed(1)}deg)`;
+
+        if (progress >= 1) {
+          catState = "none";
+          nekoEl.style.transform = "scale(1)";
+          setSprite("idle", 0);
+          resetIdleAnimation();
+        }
+        return;
+      }
+
+      // ========================================================
+      // 3. BEHAVIOR: PLAYFUL PAW BAT AT NEARBY CLICK
+      // ========================================================
+      if (catState === "batting") {
+        const elapsed = now - actionStartTime;
+        const duration = 380;
+        const progress = Math.min(1, elapsed / duration);
+
+        const diffX = nekoPosX - actionTargetX;
+        const diffY = nekoPosY - actionTargetY;
+        const dist = Math.hypot(diffX, diffY) || 1;
+        setSprite(getDirectionName(diffX, diffY, dist), Math.floor(elapsed / 60));
+
+        const batArc = Math.sin(progress * Math.PI) * 14;
+        nekoEl.style.transform = `scale(1.2, 0.85) translate(${-(diffX / dist) * batArc}px, ${-(diffY / dist) * batArc}px)`;
+
+        if (progress >= 1) {
+          catState = "none";
+          nekoEl.style.transform = "scale(1)";
+          resetIdleAnimation();
+        }
+        return;
+      }
+
+      // ========================================================
+      // 4. BEHAVIOR: SPIKED-FUR HALLOWEEN CAT JUMP & CRAB-WALK
+      // ========================================================
+      if (catState === "scared_jump") {
+        const elapsed = now - actionStartTime;
+        const duration = 320;
+        const progress = Math.min(1, elapsed / duration);
+
+        // High arched-back vertical startled leap with spiked fur
+        const jumpY = -Math.sin(progress * Math.PI) * 28;
+        setSprite("alert", 0);
+        nekoEl.style.top = `${actionStartY - 16 + jumpY}px`;
+        // Deep arched back + stiff extended legs (Halloween cat posture)
+        nekoEl.style.transform = `scale(0.85, 1.45)`;
+
+        if (progress >= 1) {
+          catState = "scared_shuffle";
+          actionStartTime = now;
+        }
+        return;
+      }
+
+      // Sideways stiff-legged crab-hop shuffle
+      if (catState === "scared_shuffle") {
+        const elapsed = now - actionStartTime;
+        const duration = 500;
+        const progress = Math.min(1, elapsed / duration);
+
+        const crabHop = Math.sin(progress * Math.PI * 4) * 4;
+        const crabSide = (actionTargetX > nekoPosX ? 1 : -1) * (progress * 16);
+
+        nekoPosX = actionStartX + crabSide;
+        nekoEl.style.left = `${nekoPosX - 16}px`;
+        nekoEl.style.transform = `scale(0.85, 1.45) translateY(${crabHop.toFixed(1)}px)`;
+
+        if (progress >= 1) {
+          catState = "scared_flee";
+          actionStartTime = now;
+          actionStartX = nekoPosX;
+          actionStartY = nekoPosY;
+        }
+        return;
+      }
+
+      if (catState === "scared_flee") {
+        const elapsed = now - actionStartTime;
+        const diffX = nekoPosX - actionTargetX;
+        const diffY = nekoPosY - actionTargetY;
+        const dist = Math.hypot(diffX, diffY);
+
+        // Sprint to nearest hiding wall with puffed tail
+        const fleeSpeed = 16;
+        if (dist > fleeSpeed) {
+          nekoPosX -= (diffX / dist) * fleeSpeed;
+          nekoPosY -= (diffY / dist) * fleeSpeed;
+          const dir = getDirectionName(diffX, diffY, dist);
+          setSprite(dir, Math.floor(elapsed / 50));
+          nekoEl.style.left = `${nekoPosX - 16}px`;
+          nekoEl.style.top = `${nekoPosY - 16}px`;
+          nekoEl.style.transform = "scale(1.15, 0.95)";
+          createFootprint(nekoPosX, nekoPosY + 4, Math.atan2(-diffY, -diffX) * (180 / Math.PI) + 90, 0.9);
+        } else {
+          // Reached wall: enter hiding / peeking stance
+          catState = "hiding";
+          actionStartTime = now;
+          nekoPosX = actionTargetX;
+          nekoPosY = actionTargetY;
+          nekoEl.style.left = `${nekoPosX - 16}px`;
+          nekoEl.style.top = `${nekoPosY - 16}px`;
+        }
+        return;
+      }
+
+      if (catState === "hiding") {
+        const elapsed = now - actionStartTime;
+        const duration = 2400;
+
+        // Partially hide off-screen, peeking ears/eyes out cautiously
+        setSprite("alert", 0);
+        nekoEl.style.transform = `scale(0.9, 0.9) translateY(12px)`;
+
+        // Spikes smooth down while safe in hiding
+        if (elapsed > 800) {
+          setSpikedFur(false);
+        }
+
+        if (elapsed > 1200 && elapsed < 1800) {
+          setSprite("tired", 0);
+        }
+
+        // Coast is clear: return to normal
+        if (elapsed >= duration) {
+          catState = "none";
+          setSpikedFur(false);
+          nekoEl.style.transform = "scale(1)";
+          setSprite("idle", 0);
+          resetIdleAnimation();
+        }
+        return;
+      }
+
+      // ========================================================
+      // 5. BEHAVIOR: HUNTING STALK, CROUCH & JUMP
+      // ========================================================
+      if (catState === "hunting_prep") {
+        const elapsed = now - actionStartTime;
+        const progress = Math.min(1, elapsed / 380);
+
         const diffX = nekoPosX - mousePosX;
         const diffY = nekoPosY - mousePosY;
         const dist = Math.hypot(diffX, diffY) || 1;
 
-        // Creep forward slowly (stalking speed 1.5px/frame with smooth deceleration)
+        // Creep forward slowly in stalk stance
         const stalkSpeed = (1 - progress) * 2.2;
         if (dist > 40) {
           nekoPosX -= (diffX / dist) * stalkSpeed;
           nekoPosY -= (diffY / dist) * stalkSpeed;
         }
 
-        // Eyes locked on prey
         const dirName = getDirectionName(diffX, diffY, dist);
         setSprite(dirName !== "idle" ? dirName : "alert", 0);
 
-        // Organic low stealth crouch: body lowers & widens smoothly
-        const crouchRatio = Math.sin(progress * Math.PI * 0.5); // smooth ease-in-out
+        const crouchRatio = Math.sin(progress * Math.PI * 0.5);
         const scaleX = 1 + 0.15 * crouchRatio;
         const scaleY = 1 - 0.20 * crouchRatio;
         const translateY = 2.5 * crouchRatio;
-
-        // Subtle realistic hip settle (smooth single breath/sway, no high-frequency jitter)
         const hipSway = Math.sin(progress * Math.PI * 2) * (1.8 * crouchRatio);
 
         nekoEl.style.left = `${nekoPosX - 16}px`;
         nekoEl.style.top = `${nekoPosY - 16}px`;
         nekoEl.style.transform = `scale(${scaleX.toFixed(3)}, ${scaleY.toFixed(3)}) translateY(${translateY.toFixed(1)}px) translateX(${hipSway.toFixed(1)}px)`;
 
-        // Launch explosive jump
-        if (elapsed >= PREP_DURATION) {
-          huntingState = "leap";
-          huntStartTime = now;
-          huntStartX = nekoPosX;
-          huntStartY = nekoPosY;
-          huntTargetX = mousePosX;
-          huntTargetY = mousePosY;
+        if (elapsed >= 380) {
+          catState = "hunting_leap";
+          actionStartTime = now;
+          actionStartX = nekoPosX;
+          actionStartY = nekoPosY;
+          actionTargetX = mousePosX;
+          actionTargetY = mousePosY;
 
-          const launchAngle = Math.atan2(huntTargetY - huntStartY, huntTargetX - huntStartX) * (180 / Math.PI) + 90;
+          const launchAngle = Math.atan2(actionTargetY - actionStartY, actionTargetX - actionStartX) * (180 / Math.PI) + 90;
           createFootprint(nekoPosX - 3, nekoPosY + 4, launchAngle, 1);
           createFootprint(nekoPosX + 3, nekoPosY + 4, launchAngle, 1);
         }
         return;
       }
 
-      // ========================================================
-      // 2. HUNTING STATE: 60FPS FLUID AIRBORNE LEAP
-      // ========================================================
-      if (huntingState === "leap") {
-        const elapsed = now - huntStartTime;
-        const progress = Math.min(1, elapsed / LEAP_DURATION);
+      if (catState === "hunting_leap") {
+        const elapsed = now - actionStartTime;
+        const progress = Math.min(1, elapsed / 320);
 
-        // Smooth cubic ease-out spring
         const easeOut = 1 - Math.pow(1 - progress, 2.4);
+        nekoPosX = actionStartX + (actionTargetX - actionStartX) * easeOut;
+        nekoPosY = actionStartY + (actionTargetY - actionStartY) * easeOut;
 
-        nekoPosX = huntStartX + (huntTargetX - huntStartX) * easeOut;
-        nekoPosY = huntStartY + (huntTargetY - huntStartY) * easeOut;
-
-        // Parabolic jump arc in air (up to 32px height at peak)
         const jumpApex = -Math.sin(progress * Math.PI) * 32;
-
-        const diffX = nekoPosX - huntTargetX;
-        const diffY = nekoPosY - huntTargetY;
+        const diffX = nekoPosX - actionTargetX;
+        const diffY = nekoPosY - actionTargetY;
         const dist = Math.hypot(diffX, diffY) || 1;
         setSprite(getDirectionName(diffX, diffY, dist), Math.floor(progress * 4));
 
-        // Smooth body stretch in flight
         const stretch = 1 + Math.sin(progress * Math.PI) * 0.22;
         nekoEl.style.left = `${nekoPosX - 16}px`;
         nekoEl.style.top = `${nekoPosY - 16 + jumpApex}px`;
         nekoEl.style.transform = `scale(${stretch.toFixed(3)}, ${(stretch * 0.95).toFixed(3)})`;
 
-        // Landing impact on target
         if (progress >= 1) {
-          huntingState = "landing";
-          huntStartTime = now;
-          nekoPosX = huntTargetX;
-          nekoPosY = huntTargetY;
+          catState = "hunting_landing";
+          actionStartTime = now;
+          nekoPosX = actionTargetX;
+          nekoPosY = actionTargetY;
           nekoEl.style.left = `${nekoPosX - 16}px`;
           nekoEl.style.top = `${nekoPosY - 16}px`;
 
-          // Landing squash
           nekoEl.style.transform = "scale(1.3, 0.7) translateY(4px)";
-          const strikeAngle = Math.atan2(huntTargetY - huntStartY, huntTargetX - huntStartX) * (180 / Math.PI) + 90;
+          const strikeAngle = Math.atan2(actionTargetY - actionStartY, actionTargetX - actionStartX) * (180 / Math.PI) + 90;
           createFootprint(nekoPosX - 5, nekoPosY + 4, strikeAngle, 1.15);
           createFootprint(nekoPosX + 5, nekoPosY + 4, strikeAngle, 1.15);
 
@@ -427,21 +796,17 @@ export default function Oneko() {
         return;
       }
 
-      // ========================================================
-      // 3. HUNTING STATE: LANDING SQUASH & TRIUMPH RECOVERY
-      // ========================================================
-      if (huntingState === "landing") {
-        const elapsed = now - huntStartTime;
+      if (catState === "hunting_landing") {
+        const elapsed = now - actionStartTime;
         setSprite("scratchSelf", Math.floor(elapsed / 90));
 
-        // Smooth bounce back from squash
         const recoveryProgress = Math.min(1, elapsed / 200);
         const scaleX = 1.3 - 0.3 * recoveryProgress;
         const scaleY = 0.7 + 0.3 * recoveryProgress;
         nekoEl.style.transform = `scale(${scaleX.toFixed(3)}, ${scaleY.toFixed(3)})`;
 
-        if (elapsed >= LANDING_DURATION) {
-          huntingState = "none";
+        if (elapsed >= 350) {
+          catState = "none";
           lastPounceTime = now;
           nekoEl.style.transform = "scale(1)";
           resetIdleAnimation();
@@ -450,13 +815,13 @@ export default function Oneko() {
       }
 
       // ========================================================
-      // 4. REGULAR CHASE & PATROL ENGINE
+      // 6. REGULAR CHASE & PATROL ENGINE
       // ========================================================
       const diffX = nekoPosX - mousePosX;
       const diffY = nekoPosY - mousePosY;
       const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
 
-      // Check for organic hunting trigger when nearing cursor (55px - 110px range)
+      // Check for organic hunting trigger when nearing cursor (52px - 110px range)
       const canHunt =
         distance >= 52 &&
         distance <= 110 &&
@@ -464,12 +829,12 @@ export default function Oneko() {
         idleTime <= 2;
 
       if (canHunt) {
-        huntingState = "prep";
-        huntStartTime = now;
-        huntStartX = nekoPosX;
-        huntStartY = nekoPosY;
-        huntTargetX = mousePosX;
-        huntTargetY = mousePosY;
+        catState = "hunting_prep";
+        actionStartTime = now;
+        actionStartX = nekoPosX;
+        actionStartY = nekoPosY;
+        actionTargetX = mousePosX;
+        actionTargetY = mousePosY;
         idleTime = 0;
         return;
       }
@@ -492,7 +857,7 @@ export default function Oneko() {
         return;
       }
 
-      // Step movement
+      // Continuous movement
       if (now - lastSpriteUpdate > 90) {
         lastSpriteUpdate = now;
         frameCount += 1;
@@ -560,5 +925,3 @@ export default function Oneko() {
 
   return null;
 }
-
-
