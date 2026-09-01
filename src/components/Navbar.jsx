@@ -106,7 +106,7 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col justify-center">
               <span className="font-display font-black text-sm xs:text-base sm:text-lg tracking-tight block text-[var(--neo-text)] group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-tight whitespace-nowrap">
-                Shahriar Abir
+                Shahriar Mahmud Abir
               </span>
               <span className="hidden sm:inline-flex items-center gap-1 text-[10px] sm:text-xs font-mono text-[var(--neo-text-muted)] font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
