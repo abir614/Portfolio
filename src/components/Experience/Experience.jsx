@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { FiServer, FiCode, FiAward, FiCheckCircle, FiBriefcase } from "react-icons/fi";
+import { FiServer, FiCode, FiShoppingBag, FiCheckCircle, FiBriefcase } from "react-icons/fi";
 import { gsap, useGSAP } from "../../lib/gsap";
 
 const experiences = [
@@ -22,7 +22,7 @@ const experiences = [
     techStack: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Shopify Headless", "Liquid", "Storefront API", "GraphQL"],
   },
   {
-    period: "2024 — Present",
+    period: "2025 — Present",
     category: "Networking & DevOps",
     badgeColor: "neo-badge-cyan",
     role: "Networking & Systems Infrastructure",
@@ -58,21 +58,22 @@ const experiences = [
     techStack: ["Node.js", "Express 5", "MongoDB", "Cloudflare D1 & KV", "JWT Auth", "GraphQL", "Edge AI", "Turnstile"],
   },
   {
-    period: "Graduated",
-    category: "Education & Foundations",
+    period: "2026 — Present",
+    category: "E-Commerce & CMS Architecture",
     badgeColor: "neo-badge-amber",
-    role: "BSc in Apparel Manufacturing & Technology",
-    company: "National Institute of Fashion Technology",
-    subtitle: "74 C/A Wireless Gate, Dhaka 1212",
+    role: "Shopify & Headless Storefront Engineering",
+    company: "Custom Themes & Headless Integrations",
+    subtitle: "Shopify OS • Liquid • Storefront API • Metaobjects",
     description:
-      "Graduated with a Bachelor of Science in Apparel Manufacturing & Technology, combining analytical systems engineering and industrial workflow optimization with self-taught computer networking and modern software engineering.",
+      "Engineering bespoke Shopify themes and high-speed headless storefronts with custom section rendering, dynamic metaobjects synchronization, and multi-tenant form pipelines.",
     highlights: [
-      "Synthesized industrial manufacturing methodologies with modern software engineering and automation",
-      "Self-taught systems fundamentals paired with real-world deployment experience across cloud environments",
-      "Active builder in web technologies, network infrastructure, and distributed edge systems",
+      "Engineered custom streetwear storefronts built from scratch on Dawn with lookbooks, tabbed sliders, and rewards systems",
+      "Developed custom form & testimonial engines syncing directly to Shopify Metaobjects with Staged Uploads API for media and 3D models",
+      "Implemented high-conversion Ajax cart flows with free-shipping progress indicators, predictive search, and multi-currency localization",
+      "Integrated headless Shopify architectures using Storefront API (GraphQL) with modern React & Next.js frontend layers",
     ],
-    icon: FiAward,
-    techStack: ["Systems Thinking", "Analytical Engineering", "Process Optimization", "Problem Solving"],
+    icon: FiShoppingBag,
+    techStack: ["Shopify OS", "Liquid Themes", "Storefront API", "Shopify Metaobjects", "Ajax API", "GraphQL"],
   },
 ];
 

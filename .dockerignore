@@ -1,9 +1,40 @@
-node_modules
-dist
+# Version Control & CI/CD
 .git
 .github
 .gitignore
-*.log
-.DS_Store
+.gitattributes
+
+# Dependencies & Build Outputs
+node_modules
+dist
+dist-ssr
+build
+.cache
+
+# Docker & Config Files Not Needed in Image
+Dockerfile*
+docker-compose*
+.dockerignore
+fly.toml
+remove_colors.cjs
+
+# Documentation & Markdown
+*.md
+LICENSE
+
+# Environment & Credentials
 .env*
+*.pem
+*.key
+
+# Editor & OS Artifacts
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+
+# Static Root Media (already in dist or not part of app source)
+preview.png
 resume.pdf

@@ -8,6 +8,7 @@ const fallbackMockRepos = [
     stargazers_count: 24,
     forks_count: 7,
     html_url: "https://github.com/abir614/amardns",
+    homepage: "https://abir614.github.io/amardns.html",
     topics: ["cloudflare-workers", "doh", "dns-over-https", "edge-ai", "dnssec", "sqlite", "featured"],
     private: false,
     updated_at: new Date().toISOString(),

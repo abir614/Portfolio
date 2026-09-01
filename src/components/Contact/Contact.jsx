@@ -186,8 +186,8 @@ export default function Contact() {
                 <p className="text-[11px] sm:text-xs font-mono text-[var(--neo-text-muted)] mb-3">
                   74 C/A Wireless Gate, Dhaka 1212, Bangladesh
                 </p>
-                <p className="text-[11px] sm:text-xs text-[var(--neo-text)] leading-relaxed bg-[var(--neo-surface-subtle)] p-3 rounded-xl border border-[var(--neo-border-subtle)] mb-4">
-                  Available for Remote, Hybrid, On-Site, Full-Time &amp; Freelance engineering roles worldwide.
+                <p className="text-[11px] sm:text-xs text-[var(--neo-text)] font-medium leading-normal bg-[var(--neo-surface-subtle)] p-2.5 sm:p-3 rounded-xl border border-[var(--neo-border-subtle)] mb-4 text-center">
+                  Available for Remote, Hybrid &amp; On-Site roles.
                 </p>
               </div>
               <div className="neo-badge neo-badge-amber rounded-lg py-1.5 text-center justify-center text-[10px]">

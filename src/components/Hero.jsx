@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { TypeAnimation } from "react-type-animation";
-import { FiGithub, FiFileText, FiArrowDown, FiTerminal, FiBriefcase, FiActivity } from "react-icons/fi";
-import { SiDocker, SiReact, SiLinux } from "react-icons/si";
+import { FiGithub, FiFileText, FiArrowDown, FiTerminal, FiBriefcase, FiActivity, FiShoppingBag } from "react-icons/fi";
+import { SiDocker, SiReact, SiLinux, SiShopify } from "react-icons/si";
 import { gsap, useGSAP } from "../lib/gsap";
 
 export default function Hero() {
@@ -123,6 +123,15 @@ export default function Hero() {
         yoyo: true,
         ease: "sine.inOut",
         delay: 0.8,
+      });
+      gsap.to(".hero-float-badge-4", {
+        y: 5,
+        rotation: -1.5,
+        duration: 3.4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 0.6,
       });
 
       // Ambient pulse for the Name Badge
@@ -249,9 +258,9 @@ export default function Hero() {
                 </span>
               </div>
               <div className="flex items-start gap-2 bg-[var(--neo-surface-subtle)] p-2.5 sm:p-3 2xl:p-3.5 rounded-xl border border-[var(--neo-border-subtle)] hover:border-[var(--neo-border)] transition-colors">
-                <span className="text-sm sm:text-base 2xl:text-lg">🎓</span>
+                <FiShoppingBag className="text-amber-500 text-sm sm:text-base 2xl:text-lg mt-0.5 flex-shrink-0" />
                 <span className="leading-snug">
-                  <strong>National Institute of Fashion Technology</strong> — BSc in Apparel Manufacturing & Technology • Dhaka 1212
+                  <strong>Shopify &amp; Headless CMS</strong> — Custom Liquid Themes &amp; Storefront API (GraphQL)
                 </span>
               </div>
             </div>
@@ -416,7 +425,15 @@ export default function Hero() {
                 style={{ transform: "translateZ(40px)" }}
               >
                 <SiLinux className="text-[10px] sm:text-xs" />
-                <span className="font-bold font-mono">Linux & OpenWrt</span>
+                <span className="font-bold font-mono">Linux &amp; OpenWrt</span>
+              </div>
+
+              <div
+                className="hero-float-badge hero-float-badge-4 absolute -bottom-2 -right-2 sm:-bottom-3 sm:-right-3 z-20 neo-badge neo-badge-emerald rounded-lg sm:rounded-xl px-2 sm:px-2.5 py-0.5 sm:py-1 flex items-center gap-1 sm:gap-1.5 text-[8px] xs:text-[9px] sm:text-[10px] shadow-[2px_2px_0px_var(--neo-shadow)] hover:scale-110 hover:-rotate-3 transition-transform cursor-pointer"
+                style={{ transform: "translateZ(35px)" }}
+              >
+                <SiShopify className="text-[10px] sm:text-xs text-emerald-800 dark:text-emerald-300" />
+                <span className="font-bold font-mono">Shopify &amp; Liquid</span>
               </div>
 
             </div>
