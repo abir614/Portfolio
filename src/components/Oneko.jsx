@@ -5,10 +5,86 @@ export default function Oneko() {
     const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (isReducedMotion) return;
 
-    // Clean up any stale existing oneko elements (especially from Vite HMR)
-    const existing = document.getElementById("oneko");
-    if (existing && existing.parentNode) {
-      existing.parentNode.removeChild(existing);
+    // Clean up any stale existing oneko and footprint elements (especially from Vite HMR)
+    const existingNeko = document.getElementById("oneko");
+    if (existingNeko && existingNeko.parentNode) {
+      existingNeko.parentNode.removeChild(existingNeko);
+    }
+    const existingFootprints = document.getElementById("neko-footprints");
+    if (existingFootprints && existingFootprints.parentNode) {
+      existingFootprints.parentNode.removeChild(existingFootprints);
+    }
+
+    // Footprints container
+    const footprintContainer = document.createElement("div");
+    footprintContainer.id = "neko-footprints";
+    footprintContainer.setAttribute("aria-hidden", "true");
+    footprintContainer.style.position = "fixed";
+    footprintContainer.style.inset = "0";
+    footprintContainer.style.pointerEvents = "none";
+    footprintContainer.style.zIndex = "9999990";
+    footprintContainer.style.overflow = "hidden";
+    document.body.appendChild(footprintContainer);
+
+    const pawTimeouts = new Set();
+    let lastPawX = 64;
+    let lastPawY = 64;
+    let isLeftPaw = false;
+
+    function createFootprint(x, y, angleDeg) {
+      if (!footprintContainer || !footprintContainer.isConnected) return;
+
+      const paw = document.createElement("div");
+      paw.className = "neko-paw-print";
+      paw.style.position = "absolute";
+      paw.style.left = `${x}px`;
+      paw.style.top = `${y}px`;
+      paw.style.width = "14px";
+      paw.style.height = "14px";
+      paw.style.pointerEvents = "none";
+      paw.style.userSelect = "none";
+      paw.style.transformOrigin = "center center";
+      paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(0.6)`;
+      paw.style.opacity = "0.75";
+      paw.style.transition = "transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1.2s ease-out";
+      paw.style.color = "var(--neo-accent, #6366f1)";
+      paw.style.filter = "drop-shadow(0 1px 2px rgba(0,0,0,0.18))";
+
+      // Cute stylized cat paw SVG (main pad + 4 toe beans)
+      paw.innerHTML = `
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="display:block; width:100%; height:100%;">
+          <path d="M12 11.5 C9.2 11.5 7.8 13.8 7.8 16.2 C7.8 18.3 9.7 20 12 20 C14.3 20 16.2 18.3 16.2 16.2 C16.2 13.8 14.8 11.5 12 11.5 Z" />
+          <circle cx="6.8" cy="9.2" r="1.9" />
+          <circle cx="10.2" cy="6.6" r="1.9" />
+          <circle cx="13.8" cy="6.6" r="1.9" />
+          <circle cx="17.2" cy="9.2" r="1.9" />
+        </svg>
+      `;
+
+      footprintContainer.appendChild(paw);
+
+      // Pop in to full scale
+      requestAnimationFrame(() => {
+        paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(1)`;
+      });
+
+      // Start fading out after delay
+      const fadeTimeout = setTimeout(() => {
+        paw.style.opacity = "0";
+        paw.style.transform = `translate(-50%, -50%) rotate(${angleDeg}deg) scale(0.65)`;
+      }, 1200);
+
+      // Remove from DOM once fully faded
+      const removeTimeout = setTimeout(() => {
+        if (paw.parentNode) {
+          paw.parentNode.removeChild(paw);
+        }
+        pawTimeouts.delete(fadeTimeout);
+        pawTimeouts.delete(removeTimeout);
+      }, 2400);
+
+      pawTimeouts.add(fadeTimeout);
+      pawTimeouts.add(removeTimeout);
     }
 
     const nekoEl = document.createElement("div");
@@ -251,14 +327,37 @@ export default function Oneko() {
       direction += diffX / distance < -0.5 ? "E" : "";
       setSprite(direction || "idle", frameCount);
 
-      nekoPosX -= (diffX / distance) * nekoSpeed;
-      nekoPosY -= (diffY / distance) * nekoSpeed;
+      // Movement vector
+      const dirX = -(diffX / distance);
+      const dirY = -(diffY / distance);
+
+      nekoPosX += dirX * nekoSpeed;
+      nekoPosY += dirY * nekoSpeed;
 
       nekoPosX = Math.min(Math.max(16, nekoPosX), window.innerWidth - 16);
       nekoPosY = Math.min(Math.max(16, nekoPosY), window.innerHeight - 16);
 
       nekoEl.style.left = `${nekoPosX - 16}px`;
       nekoEl.style.top = `${nekoPosY - 16}px`;
+
+      // Check distance traveled since last paw print
+      const distSincePaw = Math.hypot(nekoPosX - lastPawX, nekoPosY - lastPawY);
+      if (distSincePaw >= 24) {
+        const angleDeg = Math.atan2(dirY, dirX) * (180 / Math.PI) + 90;
+        // Perpendicular vector for alternating left/right paw prints
+        const perpX = -dirY;
+        const perpY = dirX;
+        const sideOffset = isLeftPaw ? -5 : 5;
+        isLeftPaw = !isLeftPaw;
+
+        const spawnX = nekoPosX + perpX * sideOffset;
+        const spawnY = (nekoPosY + 6) + perpY * sideOffset;
+
+        lastPawX = nekoPosX;
+        lastPawY = nekoPosY;
+
+        createFootprint(spawnX, spawnY, angleDeg);
+      }
     }
 
     function onAnimationFrame(timestamp) {
@@ -283,8 +382,14 @@ export default function Oneko() {
       if (nekoEl && nekoEl.parentNode) {
         nekoEl.parentNode.removeChild(nekoEl);
       }
+      if (footprintContainer && footprintContainer.parentNode) {
+        footprintContainer.parentNode.removeChild(footprintContainer);
+      }
+      pawTimeouts.forEach((id) => clearTimeout(id));
+      pawTimeouts.clear();
     };
   }, []);
 
   return null;
 }
+
